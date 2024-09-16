@@ -1,0 +1,170 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[utf8]{inputenc}
+\usepackage{enumitem} %permite el uso de letras para enumerar
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{UTN-FRC}
+\chead{ASyS}
+\rhead{2R3}
+\cfoot{\thepage}
+
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\Large\bfseries}{}{0pt}{}
+\titlespacing*{\chapter}{10pt}{-60pt}{10pt}
+
+\newcommand{\fakesection}[1]{%
+  \par\refstepcounter{section}% Increase section counter
+  \sectionmark{#1}% Add section mark (header)
+  \addcontentsline{toc}{section}{\protect\numberline{\thechapter.\alph{section}}#1}% Add section to ToC
+}
+\newcommand{\fakesubsection}[1]{%
+  \par\refstepcounter{subsection}% Increase subsection counter
+  \subsectionmark{#1}% Add subsection mark (header)
+  \addcontentsline{toc}{subsection}{\protect\numberline{\alph{subsection}}#1}% Add subsection to ToC
+}
+
+\renewcommand{\contentsname}{Tabla de Contenidos}
+
+\title{%
+  \fontsize{25}{0}\selectfont Universidad Tecnológica Nacional \\
+  \fontsize{22}{30}\selectfont Analisis de Señales y Sistemas \\
+  \fontsize{20}{25}\selectfont Trabajo Practico 3
+}
+\author{
+Alejo Agustin Lopez Demichelis\\
+Franco Palombo\\
+Ignacio Gil\\
+Jesus Agustin Frigerio\\
+Laureano Valentin Reinoso\\
+Luciano Tomas Cortesini Perez\\
+Matias Gabriel Moran\\
+Leonardo Ramos\\
+}
+\date{19 / 08 / 2024}
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\chapter{Ejercicio 1}
+Graficar ambas señales superpuestas, y verificar cuántas muestras de tiempo discreto se corresponden con el rango de tiempo continuo utilizado para la representación gráfica.
+
+\begin{enumerate}[label=\alph*), left=0pt]
+  \fakesection{}
+  \item Una señal analógica $x(t) = e^{-2t} \mu(t)$ se muestrea para generar la secuencia de tiempo discreto $x[n]$, considerar $n = nT_s$, con $T_s = 0.05$, $T_s = 0.01$, $T_s = 0.1$.
+
+  \fakesection{}
+  \item Una señal analógica $x(t) = 10 \cos(2t) \mu(t)$ se muestrea para generar la secuencia de tiempo discreto $x[n]$, con $T_s = 0.1$ y $T_s = 0.01$.
+
+  \fakesection{}
+  \item Considerar a continuación una secuencia de valores obtenida de una adquisición de datos en un proceso de muestreo. Describir una expresión matemática que permita involucrar la secuencia temporal del proceso de adquisición. Considerar la secuencia causal:
+
+  \[
+  \{0, 3.4, 6, 7, 8.5, 10, 13.4\}
+  \]
+
+\end{enumerate}
+
+\chapter{Ejercicio 2}
+Considerar el siguiente sistema de tiempo discreto:
+
+\section{Parte a)}
+Si $h_1[n] = h_2[n] = 3^{-n}\mu[n]$, $h_3[n] = \mu[n]$, $h_4[n] = 2^{-n}\mu[n]$:
+
+Calcular la respuesta al impulso del sistema. \\
+Calcular la respuesta del sistema al escalón unitario.
+
+\section{Parte b)}
+Si $h_1[n] = 2^{-n} u[n]$, $h_2[n] = \delta[n]$, $h_3[n] = h_4[n] = 3^{-n} u[n]$:
+
+Calcular la respuesta al impulso del sistema. \\
+Calcular la respuesta del sistema al escalón unitario.
+
+\chapter{Ejercicio 3}
+El objetivo de este trabajo práctico es que el alumno comprenda y aplique el concepto de ecuaciones en diferencias para modelar y resolver problemas en tiempo discreto.
+
+Considerar un sistema bancario de ahorro a tasa de interés mensual constante. Plantear el sistema considerando un depósito mensual constante en el mes $n$ de \$10, $r$ es la tasa de interés en el mismo periodo, y se considera el saldo inmediatamente después del depósito en el periodo.
+
+\section{Parte a)}
+Identificar en el problema las variables de entrada y salida del mismo.
+
+\section{Parte b)}
+Plantear un modelo en ecuaciones de diferencias capaz de caracterizar el sistema propuesto.
+
+\section{Parte c)}
+Representar la ecuación en diferencias por medio de un diagrama de bloques con retardos unitarios.
+
+\section{Parte d)}
+Evaluar el saldo para un periodo de capitalización de 48 meses.
+
+\chapter{Ejercicio 4}
+El objetivo de este trabajo práctico es poner en valor los modos de expresar la ecuación de diferencias que caracteriza un sistema en tiempo discreto y expresar la síntesis de la expresión matemática en un diagrama de bloques. Considerar este último como la expresión mínima que permita desarrollar un algoritmo de cálculo numérico con la menor cantidad de operaciones posibles.
+
+\section{Parte a)}
+Diagramar en un diagrama de bloques normalizado representativo del sistema para la siguiente ecuación en diferencias:
+
+\[
+y[n+1] + \frac{1}{2} y[n-1] = x[n] + \frac{1}{2} x[n-1]
+\]
+
+\section{Parte b)}
+Dado el sistema simulado por el diagrama de bloques a continuación, determinar la ecuación en diferencias que lo describe.
+
+\chapter{Ejercicio 5}
+El objetivo de este trabajo práctico es obtener el espectro de frecuencias de una secuencia en tiempo discreto. Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Serie de Fourier Discreta (DFT).
+
+\section{Parte a)}
+Obtener el espectro de frecuencias para $N = 3$:
+
+\[
+x[n] = 1 + \cos \left( \frac{2\pi n}{3} \right)
+\]
+
+\section{Parte b)}
+Obtener el espectro de frecuencias para $N = 6$:
+
+\[
+x[n] = 1 + \cos \left( \frac{\pi n}{3} \right)
+\]
+
+\chapter{Ejercicio 6}
+Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencias:
+
+\[
+y[n] - 1.2 y[n-1] - 0.13 y[n-2] - 0.36 y[n-3] = x[n]
+\]
+
+\section{Parte a)}
+Determinar $Y(z) = \mathcal{Z}\{y[n]\}$, la solución completa, con las siguientes condiciones iniciales:
+
+\[
+y[-1] = 1, \quad y[-2] = -1, \quad y[-3] = 1
+\]
+
+\section{Parte b)}
+Obtener la función de transferencia $H(z)$, respuesta al impulso con condiciones iniciales nulas, por medio de residuos.
+
+\section{Parte c)}
+Obtener $h[n] = \mathcal{Z}^{-1}\{H(z)\}$.
+
+\section{Parte d)}
+Obtener la respuesta al escalón unitario con condiciones iniciales nulas, por medio de fracciones parciales $y[n] = \mathcal{Z}^{-1}\{Y(z)\}$.
+
+\section{Parte e)}
+Obtener $y[n] = \mu[n] * h[n]$, la respuesta al escalón unitario sin condiciones iniciales por medio de la convolución temporal.
+
+\section{Parte f)}
+Verificar $y[n]$ para la respuesta al escalón unitario por división directa hasta la quinta muestra y reconstruir $Y(z) = \mathcal{Z}\{y[n]\}$.
+
+\section{Parte g)}
+Verificar el régimen transitorio (TVI) y el régimen de estado permanente (TVF) en ambos dominios $\{z, n\}$ para la respuesta al escalón unitario con condiciones iniciales nulas.
+
+\section{Parte h)}
+Elaborar la síntesis del sistema por medio de diagrama de bloques con retardos unitarios.
+
+\end{document}
+
