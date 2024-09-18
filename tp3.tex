@@ -1,6 +1,8 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem} %permite el uso de letras para enumerar
+\usepackage{graphicx} %para las imagenes
+\usepackage{float} %para fijar las imagenes
 
 \usepackage[a4paper, %margenes de pagina
   left=2.5cm,
@@ -72,8 +74,54 @@ tiempo continuo utilizado para la representación gráfica.
   \item \fs{} Una señal analógica $x(t) = e^{-2t} \mu(t)$ se muestrea para generar la secuencia de tiempo discreto 
     $x[n]$, considerar $n = nT_s$, con $T_s = 0.05$, $T_s = 0.01$, $T_s = 0.1$.
 
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/ej1.1.png}
+        \textit{Muestreo con $T_s=0.05$\\Muestas en el intervalo: $48$}
+      \end{minipage}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/ej1.2.png}
+        \textit{Muestreo con $T_s=0.01$\\Muestas en el intervalo: $140$}
+      \end{minipage}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/ej1.3.png}
+        \textit{Muestreo con $T_s=0.1$\\Muestas en el intervalo: $24$}
+      \end{minipage}
+    \end{figure}
+
+
   \item \fs{} Una señal analógica $x(t) = 10 \cos(2t) \mu(t)$ se muestrea para generar la secuencia de tiempo discreto
     $x[n]$, con $T_s = 0.1$ y $T_s = 0.01$.
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/ej1.4.png}
+        \textit{Muestreo con $T_s=0.1$\\Muestas en el intervalo: $32$}
+      \end{minipage}
+    \end{figure}
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/ej1.5.png}
+        \textit{Muestreo con $T_s=0.01$\\Muestas en el intervalo: $320$}
+      \end{minipage}
+    \end{figure}
 
   \item \fs{} Considerar a continuación una secuencia de valores obtenida de una adquisición de datos en un proceso de
     muestreo. Describir una expresión matemática que permita involucrar la secuencia temporal del proceso de adquisición.
@@ -82,6 +130,28 @@ tiempo continuo utilizado para la representación gráfica.
     \[
     \{0, 3.4, 6, 7, 8.5, 10, 13.4\}
     \]
+
+    Para encontrar una funcion que pase por todos los puntos de la secuencia, como una forma de aproximar la señal en el
+    dominio temporal de la cual se obtuvo la secuencia, utilizamos el metodo de interpolación de Lagrange. Definido por:
+
+    $$f(t)= \sum_{j=0}^n f[j] \prod_{i=0,i \neq j}^{n} \frac{t - t_i}{t_k - t_i}$$
+    Donde:
+
+    \centering
+    \begin{minipage}{0.5\textwidth}
+      $n$: número de elementos de la secuencia\\
+      $f[k]$: el elemento k-esimo de la secuencia\\
+      $t_i$: el instante temporal del elemento i-esimo
+    \end{minipage}
+
+    \begin{figure}[H]
+      \centering
+      \begin{minipage}{0.55\textwidth}
+        \centering
+        \includegraphics[width=1\textwidth]{./images/ej1.6.png}
+        \textit{Interpolación por polinomio de Lagrange}
+      \end{minipage}
+    \end{figure}
 
 \end{enumerate}
 
