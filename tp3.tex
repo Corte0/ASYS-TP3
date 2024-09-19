@@ -1,6 +1,10 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem} %permite el uso de letras para enumerar
+
+\usepackage{amsmath}%para entornos de alineacion
+\setlength{\jot}{7pt}%modifica el interlineado
+
 \usepackage{tikz} %Libreria para graficos
 \usetikzlibrary{calc, arrows.meta, positioning}
 
@@ -32,6 +36,7 @@
 \patchcmd{\chapter}{\thispagestyle{plain}}{\thispagestyle{fancy}}{}{} %Muestra encabezado en las paginas con \chapter
 \makeatother
 
+%Comandos de fake section y fake sub section, para poder agregar secciones al indice
 \newcommand{\fs}[1]{%
   \par\refstepcounter{section}% Increase section counter
   \sectionmark{#1}% Add section mark (header)
@@ -129,7 +134,15 @@ Considerar el siguiente sistema de tiempo discreto:
 
   \item\fs{} Si $h_1[n] = h_2[n] = 3^{-n}\mu[n]$, $h_3[n] = \mu[n]$, $h_4[n] = 2^{-n}\mu[n]$:
 
-    Calcular la respuesta al impulso del sistema. \\
+    La respuesta al impulso del sistema corresponde a:
+    \begin{align*}
+      h[n]&=(h_1[n]*h_2[n] - h_4[n])*h_3[n]\\
+      h[n]&=(3^{-n}\mu[n]*3^{-n}\mu[n] - 2^{-n}\mu[n])*\mu[n]\\
+      h[n]&=(3^{-n}(n-1)\mu[n] - 2^{-n}\mu[n])*\mu[n] \\
+      h[n]&=3^{-n}n\mu[n]*\mu[n] - 3^{-n}\mu[n]*\mu[n] - 2^{-n}\mu[n]*\mu[n]\\
+      h[n]&=\sum_{k=0}^n 3^{-k}k - \sum_{k=0}^n 3^{-k} - \sum_{k=0}^n 2^{-k}
+    \end{align*}
+
     Calcular la respuesta del sistema al escalón unitario.
 
   \item \fs{} Si $h_1[n] = 2^{-n} u[n]$, $h_2[n] = \delta[n]$, $h_3[n] = h_4[n] = 3^{-n} u[n]$:
