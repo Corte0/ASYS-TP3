@@ -4,6 +4,9 @@
 \usepackage{graphicx} %para las imagenes
 \usepackage{float} %para fijar las imagenes
 
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning} %para hacer diagramas de bloques
+
 \usepackage[a4paper, %margenes de pagina
   left=2.5cm,
   right=2.5cm,
@@ -191,7 +194,7 @@ inmediatamente después del depósito en el periodo.
 \end{enumerate}
 
 \chapter{Ejercicio 4}
-Considerareste último como la expresión mínima que permita desarrollar un algoritmo de cálculo numérico con la menor
+Considerar este último como la expresión mínima que permita desarrollar un algoritmo de cálculo numérico con la menor
 cantidad de operaciones posibles.
 
 \begin{enumerate}[label=\alph*), left=0pt]
@@ -201,6 +204,26 @@ cantidad de operaciones posibles.
     \[
     y[n+1] + \frac{1}{2} y[n-1] = x[n] + \frac{1}{2} x[n-1]
     \]
+
+  \begin{tikzpicture}[auto, node distance=2cm, >=latex']
+
+      % Nodes
+      \node [input] (input) {$x_n$};
+      \node [block] (D) {$D$};
+      \node [block] (D2) {$D^2$};
+      \node [block] (subtraction) {$\frac{1}{2} x_n - \frac{1}{2} y_n$};
+      \node [block] (sum) {\Sum};
+      \node [output] (output) {$y_n$};
+
+      % Lines
+      \draw [->] (input) -- (sum);
+      \draw [->] (output) -- (sum);
+      \draw [->] (sum) -- (D2);
+      \draw [->] (D2) -- (sum);
+      \draw [->] (sum) -- (D);
+      \draw [->] (D)--(output);
+
+  \end{tikzpicture}
 
   \item \fs{} Dado el sistema simulado por el diagrama de bloques a continuación, determinar la ecuación en diferencias
     que lo describe.
