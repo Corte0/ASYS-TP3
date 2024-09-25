@@ -205,25 +205,34 @@ cantidad de operaciones posibles.
     y[n+1] + \frac{1}{2} y[n-1] = x[n] + \frac{1}{2} x[n-1]
     \]
 
-  \begin{tikzpicture}[auto, node distance=2cm, >=latex']
 
-      % Nodes
-      \node [input] (input) {$x_n$};
-      \node [block] (D) {$D$};
-      \node [block] (D2) {$D^2$};
-      \node [block] (subtraction) {$\frac{1}{2} x_n - \frac{1}{2} y_n$};
-      \node [block] (sum) {\Sum};
-      \node [output] (output) {$y_n$};
+    \tikzstyle{block} = [draw, fill=blue!20, rectangle, minimum height=3em, minimum width=3em]
+    \tikzstyle{sum} = [draw, fill=red!20, circle, node distance=1.5cm]
+    \tikzstyle{input} = [coordinate]
+    \tikzstyle{output} = [coordinate]
 
-      % Lines
-      \draw [->] (input) -- (sum);
-      \draw [->] (output) -- (sum);
-      \draw [->] (sum) -- (D2);
-      \draw [->] (D2) -- (sum);
-      \draw [->] (sum) -- (D);
-      \draw [->] (D)--(output);
+    \begin{tikzpicture}[auto, node distance=2cm, >=latex']
 
-  \end{tikzpicture}
+        % Nodes
+        \node [input] (input) {$x_n$};
+        \node [block, right of=input] (signal1) {$\frac{1}{2} x_n$};
+        \node [block, below of=signal1] (signal2) {$- \frac{1}{2} y_n$};
+        \node [sum, right of=signal1, node distance=3cm] (sum) {+};
+        \node [block, right of=sum, node distance=3cm] (D2) {$D^2$};
+        \node [block, below of=D2] (D) {$D$};
+        \node [output, right of=D] (output) {$y_n$};
+
+        % Lines
+        \draw [->] (input) -- (signal1);
+        \draw [->] (signal1) -- (sum);
+        \draw [->] (output) |- (signal2);
+        \draw [->] (signal2) -| (sum);
+        \draw [->] (sum) -- (D2);
+        \draw [->] (D2) -- (D);
+        \draw [->] (D) -- (output);
+
+    \end{tikzpicture}
+
 
   \item \fs{} Dado el sistema simulado por el diagrama de bloques a continuación, determinar la ecuación en diferencias
     que lo describe.
