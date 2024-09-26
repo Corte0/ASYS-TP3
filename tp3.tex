@@ -4,6 +4,9 @@
 \usepackage{graphicx} %para las imagenes
 \usepackage{float} %para fijar las imagenes
 
+\usepackage{tikz} %Libreria para graficos
+\usetikzlibrary{calc, arrows.meta, positioning}
+
 \usepackage[a4paper, %margenes de pagina
   left=2.5cm,
   right=2.5cm,
@@ -183,6 +186,21 @@ inmediatamente después del depósito en el periodo.
 
   % Apartado a
   \item \fs{} Identificar en el problema las variables de entrada y salida del mismo.
+    \begin{figure}[h]
+      \centering
+      \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
+        \tikzstyle{block} = [draw, rectangle, minimum height=3em, minimum width=5em]
+
+        % Definición de nodos
+        \node at (0,0) [coordinate] (input) {}; % Nodo de entrada x(n)
+        \node [block, right=2cm of input] (sistema) {$sistema$};
+        \node [coordinate, right=2cm of sistema] (output) {}; % Nodo de salida y(n)
+
+        \draw[->] (input) -- node{$x[n]$}(sistema);
+        \draw[->] (sistema) -- node {$y[n]$} (output);
+
+        \end{tikzpicture}
+    \end{figure}
 
     La variable de entrada seria el mes en el que se hace el deposito, $n$.
 
