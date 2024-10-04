@@ -237,7 +237,7 @@ Considerar el siguiente sistema de tiempo discreto:
     La respuesta al escalon unitario esta definida por:
     \begin{align*}
       y[n] &= \mu[n] * h[n]\\[6pt]
-      y[n] &= \sum_{k \exists \mathbb{Z}} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3^{(k+1)}} -
+      y[n] &= \sum_{k \in \mathbb{Z}} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3^{(k+1)}} -
         \frac{9}{4 \cdot 3^{(k+1)}} + \frac{3}{2 \cdot 3^{(k+1)}} + \frac{2}{2^{(k+1)}} \right) \cdot \mu[k] \cdot \mu[n-k]\\[6pt]
       y[n] &= \mu[n] \cdot \sum_{k=0}^{n} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3 \cdot 3^k} -
         \frac{9}{4 \cdot 3 \cdot 3^k} + \frac{3}{2 \cdot 3 \cdot 3^k} + \frac{2}{2 \cdot 2^k} \right)\\[6pt]
@@ -272,7 +272,7 @@ Considerar el siguiente sistema de tiempo discreto:
         h[n] &= (h_1[n] * h_2[n] - h_4[n]) * h_3[n]\\[6pt]
         h[n] &= (2^{-n} \mu[n] * \delta[n] - 3^{-n} \mu[n]) * 3^{-n} \mu[n]\\[6pt]
         h[n] &= (2^{-n} \mu[n] * 3^{-n} \mu[n] - 3^{-n} \mu[n] * 3^{-n} \mu[n])\\[6pt]
-        h[n] &= \sum_{k \exists \mathbb{Z}} \left(2^{-k} \cdot 3^{-(n-k)} \right) \cdot \mu[k] \cdot \mu[n-k] - \sum_{k \exists \mathbb{Z}} \left( 3^{-k}
+        h[n] &= \sum_{k \in \mathbb{Z}} \left(2^{-k} \cdot 3^{-(n-k)} \right) \cdot \mu[k] \cdot \mu[n-k] - \sum_{k \in \mathbb{Z}} \left( 3^{-k}
           \cdot 3^{-(n-k)} \right) \cdot \mu[k] \cdot \mu[n-k]\\
         h[n] &= 3^{-n} \cdot \mu[n] \sum_{k = 0}^n \left(2^{-k} \cdot 3^k\right) - 3^{-n} \cdot \mu[n] \sum_{k=0}^n \left(3^{-k} \cdot 3^{k}\right)\\[6pt]
         h[n] &= 3^{-n} \cdot \mu[n] \sum_{k = 0}^n \left(\frac{3}{2}\right)^{k} - 3^{-n} \cdot \mu[n] \sum_{k=0}^n 1
@@ -289,7 +289,7 @@ Considerar el siguiente sistema de tiempo discreto:
     La respuesta al escalón unitario esta definida por:
     \begin{align*}
       y[n] &= \mu[n] * h[n]\\[6pt]
-      y[n] &= \sum_{k \exists \mathbb{Z}} \left(-2 \cdot 3^{-k} + 2 \cdot 3^{-n} \cdot \left(\frac{3}{2}\right)^{n+1} -
+      y[n] &= \sum_{k \in \mathbb{Z}} \left(-2 \cdot 3^{-k} + 2 \cdot 3^{-n} \cdot \left(\frac{3}{2}\right)^{n+1} -
         n \cdot 3^{-n} - 3^{-n}\right)\mu[k] \cdot \mu[n-k]\\[6pt]
         y[n] &= \mu[n] \sum_{k=0}^n \left(-2 \cdot 3^{-k} + 2 \cdot 3^{-n} \cdot \left(\frac{3}{2}\right)^{n+1} -
         n \cdot 3^{-n} - 3^{-n}\right)
