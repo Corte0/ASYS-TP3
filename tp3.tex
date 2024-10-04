@@ -227,23 +227,41 @@ Considerar el siguiente sistema de tiempo discreto:
     \end{equation}
     Con estos resultados, podemos continuar el desarrollo.
 
-    \begin{align*}
-      h[n] &= \frac{\frac{1}{3}-(n+1)\left(\frac{1}{3}\right)^{n+1} + n\left(\frac{1}{3}\right)^{n+2}}{\left(1-\frac{1}{3}\right)^2} -
-      \frac{1-\left(\frac{1}{3}\right)^{n+1}}{1-\frac{1}{3}} - \frac{1-\left(\frac{1}{2}\right)^{n+1}}{1-\frac{1}{2}}\\
-      h[n] &= -\frac{11}{4}-\frac{9}{4}(n+1)\left(\frac{1}{3}\right)^{n+1} + \frac{9}{4}n\left(\frac{1}{3}\right)^{n+2} -
-      \frac{3}{2} \left(\frac{1}{3} \right)^{n+1} - 2 \left(\frac{1}{2}\right)^{n+1}
-    \end{align*}
+    {
+      \allowdisplaybreaks
+      \begin{align*}
+        h[n] &= \left(\frac{\frac{1}{3}-(n+1)\left(\frac{1}{3}\right)^{n+1} + n\left(\frac{1}{3}\right)^{n+2}}{\left(1-\frac{1}{3}\right)^2} -
+          \frac{1-\left(\frac{1}{3}\right)^{n+1}}{1-\frac{1}{3}} - \frac{1-\left(\frac{1}{2}\right)^{n+1}}{1-\frac{1}{2}}\right) \mu[n]\\
+        %
+        h[n] &= \left(-\frac{11}{4}-\frac{9}{4}(n+1)\left(\frac{1}{3}\right)^{n+1} + \frac{9}{4}n\left(\frac{1}{3}\right)^{n+2} -
+        \frac{3}{2} \left(\frac{1}{3} \right)^{n+1} - 2 \left(\frac{1}{2}\right)^{n+1}\right) \mu[n] \\
+        %
+        h[n] &= \left(-\frac{11}{4} -\frac{3}{4} n 3^{-n} - \frac{3}{4} 3^{-n} +
+          \frac{1}{4}n 3^{-n} - \frac{1}{2} 3^{-n} - 2^{-n}\right) \mu[n]\\
+        %
+        h[n] &= \left(-\frac{11}{4} - 2^{-n} - \frac{2}{4} n 3^{-n} - \frac{5}{4} 3^{-n}\right) \mu[n]
+      \end{align*}
+    }
 
     La respuesta al escalon unitario esta definida por:
     \begin{align*}
       y[n] &= \mu[n] * h[n]\\[6pt]
-      y[n] &= \sum_{k \in \mathbb{Z}} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3^{(k+1)}} -
-        \frac{9}{4 \cdot 3^{(k+1)}} + \frac{3}{2 \cdot 3^{(k+1)}} + \frac{2}{2^{(k+1)}} \right) \cdot \mu[k] \cdot \mu[n-k]\\[6pt]
-      y[n] &= \mu[n] \cdot \sum_{k=0}^{n} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3 \cdot 3^k} -
-        \frac{9}{4 \cdot 3 \cdot 3^k} + \frac{3}{2 \cdot 3 \cdot 3^k} + \frac{2}{2 \cdot 2^k} \right)\\[6pt]
-      y[n] &= \mu[n] \cdot \sum_{k=0}^{n} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{3k}{4 \cdot 3^k} -
-        \frac{3}{4 \cdot 3^k} + \frac{1}{2 \cdot 3^k} + \frac{1}{2^k}\right)
+      %
+      y[n] &= \sum_{k \in \mathbb{Z}} \left(-\frac{11}{4} - 2^{-n} - \frac{2}{4} n 3^{-n} - \frac{5}{4} 3^{-n}\right) \mu[k] \mu[n-k]\\
+      %
+      y[n] &= \mu[n] \sum_{k=0}^n \left(-\frac{11}{4} - 2^{-n} - \frac{2}{4} n 3^{-n} - \frac{5}{4} 3^{-n}\right)
     \end{align*}
+
+    % desarrollo pambi
+    %\begin{align*}
+    %  y[n] &= \mu[n] * h[n]\\[6pt]
+    %  y[n] &= \sum_{k \in \mathbb{Z}} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3^{(k+1)}} -
+    %    \frac{9}{4 \cdot 3^{(k+1)}} + \frac{3}{2 \cdot 3^{(k+1)}} + \frac{2}{2^{(k+1)}} \right) \cdot \mu[k] \cdot \mu[n-k]\\[6pt]
+    %  y[n] &= \mu[n] \cdot \sum_{k=0}^{n} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{9k}{4 \cdot 3 \cdot 3^k} -
+    %    \frac{9}{4 \cdot 3 \cdot 3^k} + \frac{3}{2 \cdot 3 \cdot 3^k} + \frac{2}{2 \cdot 2^k} \right)\\[6pt]
+    %  y[n] &= \mu[n] \cdot \sum_{k=0}^{n} \left(-\frac{11}{4} - \frac{5k}{4 \cdot 3^k} + \frac{3k}{4 \cdot 3^k} -
+    %    \frac{3}{4 \cdot 3^k} + \frac{1}{2 \cdot 3^k} + \frac{1}{2^k}\right)
+    %\end{align*}
 
     El desarrollo, ademas de largo, es engorroso y carece de la aplicacion de alguna propiedad importante o identidad
     no vista. Todos los terminos de la suma usan o la identidad de la serie trigonometrica (\ref{s.geometrica}), su
