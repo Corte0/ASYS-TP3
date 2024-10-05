@@ -219,7 +219,7 @@ inmediatamente después del depósito en el periodo.
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej3.1.png}
-        \textit{Ahorro acumulado en un periodo de 12 meses}
+        \textit{Saldo para un periodo de capitalización de 12 meses}
       \end{minipage}
     \end{figure}
 
@@ -238,26 +238,31 @@ inmediatamente después del depósito en el periodo.
       %\node at (0,0) (input) {};
       \node at (0,0) [squaredNode] (int1) {D};
       \node [above=2cm of int1] (input) {$x[n]$};
-      \node[circleSum, right=1cm of int1] (sum1) {$\sum$};
-      \node[circleNode, right=1cm of sum1] (nodo1) {};
-      \node[squaredNode, above=1cm of sum1] (multi1) {10};
-      \node[right=2.3cm of sum1] (output) {$y[n]$};
-      \node[squaredNode, below=0.7cm of int1] (multi2) {1.1};
+      \node [circleSum, right=1cm of int1] (sum1) {$\sum$};
+      \node [circleNode, right=1cm of sum1] (nodo1) {};
+      \node [squaredNode, above=1cm of sum1] (multi1) {10};
+      \node [right=2.3cm of sum1] (output) {$y[n]$};
+      \node [squaredNode, below=0.7cm of int1] (multi2) {1.1};
 
-      \draw[myLine] (input) -- (1.994, 2.88);
-      \draw[->] (1.98,2.88) -- (multi1);
-      \draw[->] (multi1) -- (sum1);
-      \draw[->] (int1) -- (sum1);
-      \draw[->] (sum1) -- (output);
-      \draw[myLine] (nodo1) -- (3.55,-4) -- (-0.014,-4);
-      \draw[->] (0,-4) -- (multi2);
-      \draw[->] (multi2) -- (int1);
+      \draw [myLine] (input) -- (1.994, 2.88);
+      \draw [->] (1.98,2.88) -- (multi1);
+      \draw [->] (multi1) -- (sum1);
+      \draw [->] (int1) -- (sum1);
+      \draw [->] (sum1) -- (output);
+      \draw [myLine] (nodo1) -- (3.55,-4) -- (-0.014,-4);
+      \draw [->] (0,-4) -- (multi2);
+      \draw [->] (multi2) -- (int1);
 
     \end{tikzpicture}
   \end{center}
 
   %Apartado d
   \item \fs{} Evaluar el saldo para un periodo de capitalización de 48 meses.
+
+    Para un periodo de capitalizacion de 48 meses, se haria $n=48$ y la ecuacion de diferencias quedaria:
+      $$y[48] = x[48] + 1.1 \cdot y[47]$$
+      $$y[48] = 10 + 1.1 \cdot 9601.7234$$
+      $$y[48] = 10571.896$$
 \end{enumerate}
 
 \chapter{Ejercicio 4}
