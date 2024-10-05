@@ -507,6 +507,22 @@ y[n] - 1.2 y[n-1] - 0.13 y[n-2] - 0.36 y[n-3] = x[n]
     y[-1] = 1, \quad y[-2] = -1, \quad y[-3] = 1
     \]
 
+    Despejando $y[n]$:
+    $$y[n] = x[n] + 1.2 y[n-1] + 0.13 y[n-2] + 0.36 y[n-3] $$
+    Y aplicando las propiedades de linealidad y atraso de la transformada Z:
+
+    \begin{align*}
+      Y[z] &= X[z] + 1.2 ( Y[z]z^{-1} + y[-1]) + 0.13 ( Y[z]z^{-2} + y[-1]z^{-1} + y[-2]) +\\
+           &\hspace{20mm} 0.36 (Y[z]z^{-3} + y[-1]z^{-2} +y[-2]z^{-1} + y[-3])\\
+      Y[z] &= X[z] + 1.2 ( Y[z]z^{-1} + 1) + 0.13 ( Y[z]z^{-2} + z^{-1} - 1) + 0.36 (Y[z]z^{-3} + z^{-2} - z^{-1} + 1)\\
+      Y[z] &= X[z] + 1.2 Y[z]z^{-1}  + 0.13 Y[z]z^{-2} + 1.43 + 0.36Y[z]z^{-3} + 0.36z^{-2} - 0.23 z^{-1} \\
+    \end{align*}
+    \begin{align*}
+      Y[z] - 0.36Y[z]z^{-3} - 0.13 Y[z]z^{-2} - 1.2 Y[z]z^{-1} &= X[z] + 1.43 + 0.36z^{-2} - 0.23 z^{-1}\\
+      Y[z] (1 - 0.36z^{-3} - 0.13 z^{-2} - 1.2 z^{-1}) &= X[z] + z^{-3} + 1.43 + 0.36z^{-2} - 0.23 z^{-1}\\
+      Y[z]  &= \frac{X[z] + 1.43 + z^{-3} + 0.36z^{-2} - 0.23 z^{-1}}{(1 - 0.36z^{-3} - 0.13 z^{-2} - 1.2 z^{-1})}\\
+    \end{align*}
+
   \item \fs{} Obtener la función de transferencia $H(z)$, respuesta al impulso con condiciones iniciales nulas, por
     medio de residuos.
 
