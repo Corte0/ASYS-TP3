@@ -202,7 +202,7 @@ inmediatamente después del depósito en el periodo.
         \end{tikzpicture}
     \end{figure}
 
-    La variable de entrada seria el mes en el que se hace el deposito, $n$.
+    La variable de entrada seria el deposito mensual, en este caso constante, $x[n] = 10\mu_n$.
 
     La variable de salida seria el ahorro acumulado hasta el mes $n$, $y[n]$.
   %Apartado b
@@ -212,7 +212,7 @@ inmediatamente después del depósito en el periodo.
 
     $$y[n] = x[n] + r \cdot y[n-1]$$
 
-    Haciendo $x[n] = 10$ y $r = 1.1$, obtenemos el siguiente grafico:
+    Haciendo $r = 1.1$, obtenemos el siguiente grafico:
 
     \begin{figure}[H]
       \centering
@@ -225,6 +225,36 @@ inmediatamente después del depósito en el periodo.
 
   %Apartado c
   \item \fs{} Representar la ecuación en diferencias por medio de un diagrama de bloques con retardos unitarios.
+
+  \begin{center}
+    \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
+      \tikzstyle{squaredNode} = [rectangle, draw=black, minimum height = 1cm, minimum width = 1cm]
+      \tikzstyle{circleNode} = [circle, draw=black, fill=black, minimum size = 0.1mm, inner sep = 1pt]
+      \tikzstyle{circleSum} = [circle, draw=black, minimum size = 1mm]
+      \tikzstyle{myLine} = [draw=black, thick, solid]
+      \tikzstyle{nodo} = [draw=black, fill=black, thick]
+
+      % Definición de nodos
+      %\node at (0,0) (input) {};
+      \node at (0,0) [squaredNode] (int1) {D};
+      \node [above=2cm of int1] (input) {$x[n]$};
+      \node[circleSum, right=1cm of int1] (sum1) {$\sum$};
+      \node[circleNode, right=1cm of sum1] (nodo1) {};
+      \node[squaredNode, above=1cm of sum1] (multi1) {10};
+      \node[right=2.3cm of sum1] (output) {$y[n]$};
+      \node[squaredNode, below=0.7cm of int1] (multi2) {1.1};
+
+      \draw[myLine] (input) -- (1.994, 2.88);
+      \draw[->] (1.98,2.88) -- (multi1);
+      \draw[->] (multi1) -- (sum1);
+      \draw[->] (int1) -- (sum1);
+      \draw[->] (sum1) -- (output);
+      \draw[myLine] (nodo1) -- (3.55,-4) -- (-0.014,-4);
+      \draw[->] (0,-4) -- (multi2);
+      \draw[->] (multi2) -- (int1);
+
+    \end{tikzpicture}
+  \end{center}
 
   %Apartado d
   \item \fs{} Evaluar el saldo para un periodo de capitalización de 48 meses.
