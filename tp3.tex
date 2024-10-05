@@ -169,33 +169,33 @@ tiempo continuo utilizado para la representación gráfica.
 Considerar el siguiente sistema de tiempo discreto:
 
 \begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
-        % Definición de estilos para los bloques y el sumador
-        \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
-        \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=0.7cm, node distance=2cm]
-        \tikzstyle{connector} = [fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
+  \centering
+  \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
+    % Definición de estilos para los bloques y el sumador
+    \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
+    \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=0.7cm, node distance=2cm]
+    \tikzstyle{connector} = [fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
 
-        % Definición de nodos
-        \node at (0,-3) [coordinate] (input) {}; % Nodo de entrada x(n)
-        \node [connector, right=2cm of input] (c1) {};
-        \node [block, right=1cm of c1, yshift=1.5cm] (h1) {$h_1[n]$};
-        \node [block, right=1cm of h1] (h2) {$h_2[n]$};
-        \node [sum, right=0.5cm of h2, yshift=-1.45cm] (sumador) {$\Sigma$}; % Nodo del sumador
-        \node [block, right=1cm of sumador] (h3) {$h_3[n]$}; % Bloque h3
-        \node [coordinate, right=2cm of h3] (output) {}; % Nodo de salida y(n)
-        \node [block, below=1cm of c1, xshift=2.8cm] (h4) {$h_4[n]$}; % Nodo de h4, en paralelo
+    % Definición de nodos
+    \node at (0,-3) [coordinate] (input) {}; % Nodo de entrada x(n)
+    \node [connector, right=2cm of input] (c1) {};
+    \node [block, right=1cm of c1, yshift=1.5cm] (h1) {$h_1[n]$};
+    \node [block, right=1cm of h1] (h2) {$h_2[n]$};
+    \node [sum, right=0.5cm of h2, yshift=-1.45cm] (sumador) {$\Sigma$}; % Nodo del sumador
+    \node [block, right=1cm of sumador] (h3) {$h_3[n]$}; % Bloque h3
+    \node [coordinate, right=2cm of h3] (output) {}; % Nodo de salida y(n)
+    \node [block, below=1cm of c1, xshift=2.8cm] (h4) {$h_4[n]$}; % Nodo de h4, en paralelo
 
-        \draw[->] (input) -- node{$x[n]$}(c1);
-        \draw[->] (c1) |- (h1);
-        \draw[->] (h1) -- (h2);
-        \draw[->] (h2) -| node [left, pos=0.9] {$+$} (sumador);
-        \draw[->] (sumador) -- (h3);
-        \draw[->] (h3) -- node {$y[n]$} (output);
-        \draw[->] (c1) |- (h4); % Conexi+n del input hacia h4
-        \draw[->] (h4) -| node[pos=0.9] {$-$} (sumador); % Conexión desde h4 hacia el sumador con signo negativo
+    \draw[->] (input) -- node{$x[n]$}(c1);
+    \draw[->] (c1) |- (h1);
+    \draw[->] (h1) -- (h2);
+    \draw[->] (h2) -| node [left, pos=0.9] {$+$} (sumador);
+    \draw[->] (sumador) -- (h3);
+    \draw[->] (h3) -- node {$y[n]$} (output);
+    \draw[->] (c1) |- (h4); % Conexi+n del input hacia h4
+    \draw[->] (h4) -| node[pos=0.9] {$-$} (sumador); % Conexión desde h4 hacia el sumador con signo negativo
 
-    \end{tikzpicture}
+  \end{tikzpicture}
 \end{figure}
 
 \begin{enumerate}[label=\alph*), left=0pt]
@@ -309,7 +309,7 @@ Considerar el siguiente sistema de tiempo discreto:
       y[n] &= \mu[n] * h[n]\\[6pt]
       y[n] &= \sum_{k \in \mathbb{Z}} \left(-2 \cdot 3^{-k} + 2 \cdot 3^{-n} \cdot \left(\frac{3}{2}\right)^{n+1} -
         n \cdot 3^{-n} - 3^{-n}\right)\mu[k] \cdot \mu[n-k]\\[6pt]
-        y[n] &= \mu[n] \sum_{k=0}^n \left(-2 \cdot 3^{-k} + 2 \cdot 3^{-n} \cdot \left(\frac{3}{2}\right)^{n+1} -
+      y[n] &= \mu[n] \sum_{k=0}^n \left(-2 \cdot 3^{-k} + 2 \cdot 3^{-n} \cdot \left(\frac{3}{2}\right)^{n+1} -
         n \cdot 3^{-n} - 3^{-n}\right)
     \end{align*}
 
