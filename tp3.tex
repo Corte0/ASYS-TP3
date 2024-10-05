@@ -481,7 +481,81 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
     x[n] = 1 + \cos \left( \frac{2\pi n}{3} \right)
     \]
 
-    %insertar imagen de la onda muesteada
+    %insertar imagen de la onda muesteada, chupala
+
+    La serie de fourier discreta esta definida como:
+    \begin{equation}
+      x[n] = \sum_{k=0}^{N-1} a_k \cdot e^{j\frac{2 \pi k n}{N}}
+    \end{equation}
+    
+    donde:
+    \begin{equation}
+      a_k = \frac{1}{N} \sum_{n=0}^{N-1} x[n] \cdot e^{-j\frac{2 \pi k n}{N}}
+    \end{equation}
+
+    Entonces:
+    \[
+      a_k = \frac{1}{3} \sum_{n=0}^{3-1} \left(1 + cos\left(\frac{2 \pi n}{3}\right) \right) \cdot e^{-j\frac{2 \pi k n}{N}}
+    \]
+
+    Para llevar a cabo esta sumatoria, es recomendable expandirla termino a termino, ya que si pasamos el coseno a su
+    forma compleja, y usamos la simplificacion de la serie geometrica (\ref{s.geometrica}), todos los terminos terminan
+    valiendo cero.
+    \begin{align*}
+      a_k &= \frac{1}{3} \left(\left(1 + cos\left(0\right) \right) e^0 +
+        \left(1 + cos\left(\frac{2 \pi}{3}\right) \right) e^{-j\frac{2 \pi k}{3}} +
+        \left(1 + cos\left(\frac{4 \pi}{3}\right) \right) e^{-j\frac{4 \pi k}{3}}\right)\\
+        a_k &= \frac{1}{3} \left(2 + \frac{1}{2} e^{-j\frac{2 \pi k}{3}} + \frac{1}{2} e^{-j\frac{4 \pi k}{3}}\right)\\
+        a_k &= \frac{2}{3} + \frac{1}{6} \left(e^{-j\frac{2 \pi k}{3}} + e^{-j\frac{4 \pi k}{3}}\right)
+    \end{align*}
+
+    Teniendo la expresion de $a_k$, la obtencion de su espectro es tan simple como obtener su modulo y fase.\\
+    Para el modulo, usamos la expresion:
+    \begin{equation}
+      |z| = \sqrt{Re(z)^2 + Im(z)^2}
+    \end{equation}
+
+    y para la fase, usamos:
+    \begin{equation}
+      Arg(z) = arctan2(x, y) = 
+      \begin{cases}
+        \arctan\left(\frac{y}{x}\right) & x > 0 \\
+        \arctan\left(\frac{y}{x}\right) + \pi & y \geq 0, \, x < 0 \\
+        \arctan\left(\frac{y}{x}\right) - \pi & y < 0, \, x < 0 \\
+        +\frac{\pi}{2} & y > 0, \, x = 0 \\
+        -\frac{\pi}{2} & y < 0, \, x = 0 \\
+        \text{indefinido} & y = 0, \, x = 0
+      \end{cases}
+    \end{equation}
+
+    Donde nos termina quedando:
+
+    \begin{figure}[H]
+      \centering
+      \noindent
+      \begin{minipage}{0.4\textwidth}
+        \centering
+        \begin{align*}
+          |a_k| =
+          \begin{cases}
+            1{,}8\overline{3} &k = 3m, \hspace{1cm} m \in \mathbb{Z}\\
+            1{,}\overline{3} &k = 3m+1, \hspace{3mm} m \in \mathbb{Z}
+          \end{cases}
+        \end{align*}
+        \includegraphics[width=1\textwidth]{./images/ej5.1.png}
+        \textit{Diagrama de fases $a_k$}
+      \end{minipage}
+      \hspace{1cm}
+      \begin{minipage}{0.4\textwidth}
+        \centering
+        \begin{align*}
+          \angle a_k = 0\\
+        \end{align*}
+        \includegraphics[width=1\textwidth]{./images/ej5.2.png}
+        \textit{Diagrama de fases $a_k$}
+      \end{minipage}
+  \end{figure}
+
 
   \item \fs{} Obtener el espectro de frecuencias para $N = 6$:
 
