@@ -3,6 +3,7 @@
 \usepackage{enumitem} %permite el uso de letras para enumerar
 \usepackage{graphicx} %para las imagenes
 \usepackage{float} %para fijar las imagenes
+\usepackage{amsmath} %para centrar ecuaciones
 
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning} %para hacer diagramas de bloques
@@ -75,7 +76,7 @@ Graficar ambas señales superpuestas, y verificar cuántas muestras de tiempo di
 tiempo continuo utilizado para la representación gráfica.
 
 \begin{enumerate}[label=\alph*), left=0pt]
- 
+
   \item \fs{} Una señal analógica $x(t) = e^{-2t} \mu(t)$ se muestrea para generar la secuencia de tiempo discreto 
     $x[n]$, considerar $n = nT_s$, con $T_s = 0.05$, $T_s = 0.01$, $T_s = 0.1$.
 
@@ -194,53 +195,55 @@ inmediatamente después del depósito en el periodo.
 \end{enumerate}
 
 \chapter{Ejercicio 4}
-Considerar este último como la expresión mínima que permita desarrollar un algoritmo de cálculo numérico con la menor
-cantidad de operaciones posibles.
 
 \begin{enumerate}[label=\alph*), left=0pt]
   \item \fs{} Diagramar en un diagrama de bloques normalizado representativo del sistema para la siguiente ecuación en
     diferencias:
 
-    \[
-    y[n+1] + \frac{1}{2} y[n-1] = x[n] + \frac{1}{2} x[n-1]
-    \]
+    \begin{align*}
+      y_{[n+1]} + \frac{1}{2} y_{[n-1]} &= x_{[n]} + \frac{1}{2} x_{[n-1]}\\
+      y_{[n+1]} &= x_{[n]} + \frac{1}{2} x_{[n-1]} - \frac{1}{2} y_{[n-1]}\\
+      y_{[n]} &= x_{[n-1]} + \frac{1}{2} x_{[n-2]} - \frac{1}{2} y_{[n-2]}\\
+      y_{[n]} &= D\{x_{[n]}\} + D^2\{\frac{1}{2} x_{[n]} - \frac{1}{2} y_{[n]}\}\\
+      \end{align*}
 
-
+    \centering
     \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
-        % Definición de estilos para los bloques y sumador
-        \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
-        \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=1cm, node distance=2cm]
-        \tikzstyle{connector} = [draw, fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
+      % Definición de estilos para los bloques y sumador
+      \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
+      \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=1cm, node distance=2cm]
+      \tikzstyle{connector} = [draw, fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
 
-        % Nodes
-        \node at (0,0) [coordinate] (input){};
-        \node [coordinate, on grid, right=3cm of input] (elbowInput1){};
-        \node [block, on grid, below=1cm of elbowInput1] (signal1) {$\frac{1}{2}$};
-        \node [sum, on grid, below=2cm of signal1] (sum1) {$\sum$};
-        \node [block, on grid, below=2cm of sum1] (signal2) {$- \frac{1}{2}$};
-        \node [block, on grid, right=2cm  of sum1] (diferenciador1){$D$};
-        \node [coordinate, on grid, right=7cm of input] (elbowInput2){};
-        \node [block, on grid, below=1cm of elbowInput2] (signal3) {$1$};
-        \node [sum, on grid, right=2cm of diferenciador1](sum2){$\sum$};
-        \node [block, on grid, right=2cm of sum2](diferenciador2){$D$};
-        \node [coordinate, on grid, right=4cm of diferenciador2](output){};
-        \node [connector, on grid, right=1cm of diferenciador2](punto1){};
-        \node [coordinate, on grid, below=2cm of punto1](elbowOutput1){};
+      % Nodes
+      \node at (0,0) [coordinate] (input){};
+      \node [coordinate, on grid, right=3cm of input] (elbowInput1){};
+      \node [block, on grid, below=1cm of elbowInput1] (signal1) {$\frac{1}{2}$};
+      \node [connector, on grid, above=1.4cm of signal1](punto2){};
+      \node [sum, on grid, below=2cm of signal1] (sum1) {$\sum$};
+      \node [block, on grid, below=2cm of sum1] (signal2) {$- \frac{1}{2}$};
+      \node [block, on grid, right=2cm  of sum1] (diferenciador1){$D$};
+      \node [coordinate, on grid, right=7cm of input] (elbowInput2){};
+      \node [block, on grid, below=1cm of elbowInput2] (signal3) {$1$};
+      \node [sum, on grid, right=2cm of diferenciador1](sum2){$\sum$};
+      \node [block, on grid, right=2cm of sum2](diferenciador2){$D$};
+      \node [coordinate, on grid, right=4cm of diferenciador2](output){};
+      \node [connector, on grid, right=1cm of diferenciador2](punto1){};
+      \node [coordinate, on grid, below=2cm of punto1](elbowOutput1){};
 
-        % Lines
-        \draw [-] (input) -- node{$x_n(n)$} (elbowInput1);
-        \draw [->] (elbowInput1) -- (signal1);
-        \draw [-] (punto1) -- (elbowOutput1);
-        \draw [->] (elbowOutput1) -- (signal2);
-        \draw [-] (elbowInput1) -- (elbowInput2);
-        \draw [->] (signal1) -- (sum1);
-        \draw [->] (signal2) -- (sum1);
-        \draw [->] (sum1) -- (diferenciador1);
-        \draw [->] (diferenciador1) -- (sum2);
-        \draw [->] (elbowInput2) -- (signal3);
-        \draw [->] (signal3) -- (sum2);
-        \draw [->] (sum2) -- (diferenciador2);
-        \draw [->] (diferenciador2) -- node {$y_n(n)$}(output);
+      % Lines
+      \draw [-] (input) -- node{$x_n(n)$} (elbowInput1);
+      \draw [->] (elbowInput1) -- (signal1);
+      \draw [-] (punto1) -- (elbowOutput1);
+      \draw [->] (elbowOutput1) -- (signal2);
+      \draw [-] (elbowInput1) -- (elbowInput2);
+      \draw [->] (signal1) -- (sum1);
+      \draw [->] (signal2) -- (sum1);
+      \draw [->] (sum1) -- (diferenciador1);
+      \draw [->] (diferenciador1) -- (sum2);
+      \draw [->] (elbowInput2) -- (signal3);
+      \draw [->] (signal3) -- (sum2);
+      \draw [->] (sum2) -- (diferenciador2);
+      \draw [->] (diferenciador2) -- node {$y_n(n)$}(output);
 
     \end{tikzpicture}
 
@@ -248,65 +251,61 @@ cantidad de operaciones posibles.
   \item \fs{} Dado el sistema simulado por el diagrama de bloques a continuación, determinar la ecuación en diferencias
     que lo describe.
 
+    \centering
     \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
-        % Definición de estilos para los bloques y sumador
-        \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
-        \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=1cm, node distance=2cm]
-        \tikzstyle{connector} = [draw, fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
+      % Definición de estilos para los bloques y sumador
+      \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
+      \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=1cm, node distance=2cm]
+      \tikzstyle{connector} = [draw, fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
 
-        % Nodes
-        \node at (0,0) [coordinate] (input){};
-        \node [coordinate, on grid, right=3cm of input] (elbowInput1){};
-        \node [block, on grid, below=1cm of elbowInput1] (signal1) {$\frac{1}{2}$};
-        \node [sum, on grid, below=2cm of signal1] (sum1) {$\sum$};
-        \node [block, on grid, below=2cm of sum1] (signal2) {$-3$};
-        \node [coordinate, on grid, below=1cm of signal2](elbowOutput3){};
-        \node [block, on grid, right=2cm  of sum1] (diferenciador1){$D$};
-        \node [coordinate, on grid, right=11cm of input] (elbowInput2){};
-        \node [block, on grid, below=1cm of elbowInput2] (signal3) {$-5$};
-        \node [sum, on grid, right=2cm of diferenciador1](sum2){$\sum$};
-        \node [block, on grid, below=2cm of sum2] (signal4) {$3$};
-        \node [coordinate, on grid, below=1cm of signal4](elbowOutput2){};
-        \node [block, on grid, right=2cm of sum2](diferenciador2){$D$};
-        \node [sum, on grid, right=2cm of diferenciador2](sum3){$\sum$};
-        \node [coordinate, on grid, right=5cm of sum3](output){};
-        \node [connector, on grid, right=1cm of sum3](punto1){};
-        \node [coordinate, on grid, below=3cm of punto1](elbowOutput1){};
-        \node [connector, on grid, below=3cm of sum2](nodo1){};
-        \node [connector, on grid, above=3.4cm of sum1](nodo1){};
+      % Nodes
+      \node at (0,0) [coordinate] (input){};
+      \node [coordinate, on grid, right=3cm of input] (elbowInput1){};
+      \node [block, on grid, below=1cm of elbowInput1] (signal1) {$\frac{1}{2}$};
+      \node [sum, on grid, below=2cm of signal1] (sum1) {$\sum$};
+      \node [block, on grid, below=2cm of sum1] (signal2) {$-3$};
+      \node [coordinate, on grid, below=1cm of signal2](elbowOutput3){};
+      \node [block, on grid, right=2cm  of sum1] (diferenciador1){$D$};
+      \node [coordinate, on grid, right=11cm of input] (elbowInput2){};
+      \node [block, on grid, below=1cm of elbowInput2] (signal3) {$-5$};
+      \node [sum, on grid, right=2cm of diferenciador1](sum2){$\sum$};
+      \node [block, on grid, below=2cm of sum2] (signal4) {$3$};
+      \node [coordinate, on grid, below=1cm of signal4](elbowOutput2){};
+      \node [block, on grid, right=2cm of sum2](diferenciador2){$D$};
+      \node [sum, on grid, right=2cm of diferenciador2](sum3){$\sum$};
+      \node [coordinate, on grid, right=3cm of sum3](output){};
+      \node [connector, on grid, right=1cm of sum3](punto1){};
+      \node [coordinate, on grid, below=3cm of punto1](elbowOutput1){};
+      \node [connector, on grid, below=3cm of sum2](nodo1){};
+      \node [connector, on grid, above=3.4cm of sum1](nodo1){};
 
-        % Lines
-        \draw [-] (input) -- node{$x_n(n)$} (elbowInput1);
-        \draw [->] (elbowInput1) -- (signal1);
-        \draw [-] (punto1) -- (elbowOutput1);
-        \draw [-] (elbowOutput1) -- (elbowOutput2);
-        \draw [-] (elbowOutput1) -- (elbowOutput3);
-        \draw [->] (elbowOutput3) -- (signal2);
-        \draw [->] (elbowOutput2) -- (signal4);
-        \draw [-] (elbowInput1) -- (elbowInput2);
-        \draw [->] (signal1) -- (sum1);
-        \draw [->] (signal2) -- (sum1);
-        \draw [->] (sum1) -- (diferenciador1);
-        \draw [->] (diferenciador1) -- (sum2);
-        \draw [->] (signal4) -- (sum2);
-        \draw [->] (elbowInput2) -- (signal3);
-        \draw [->] (sum2) -- (diferenciador2);
-        \draw [->] (signal3) -- (sum3);
-        \draw [->] (diferenciador2) -- (sum3);
-        \draw [->] (sum3) -- node {$y_n(n)$}(output);
+      % Lines
+      \draw [-] (input) -- node{$x_n(n)$} (elbowInput1);
+      \draw [->] (elbowInput1) -- (signal1);
+      \draw [-] (punto1) -- (elbowOutput1);
+      \draw [-] (elbowOutput1) -- (elbowOutput2);
+      \draw [-] (elbowOutput1) -- (elbowOutput3);
+      \draw [->] (elbowOutput3) -- (signal2);
+      \draw [->] (elbowOutput2) -- (signal4);
+      \draw [-] (elbowInput1) -- (elbowInput2);
+      \draw [->] (signal1) -- (sum1);
+      \draw [->] (signal2) -- (sum1);
+      \draw [->] (sum1) -- (diferenciador1);
+      \draw [->] (diferenciador1) -- (sum2);
+      \draw [->] (signal4) -- (sum2);
+      \draw [->] (elbowInput2) -- (signal3);
+      \draw [->] (sum2) -- (diferenciador2);
+      \draw [->] (signal3) -- (sum3);
+      \draw [->] (diferenciador2) -- (sum3);
+      \draw [->] (sum3) -- node {$y_n(n)$}(output);
 
     \end{tikzpicture}
 
-\[
-y_{[n]} = -5y_{[n]} + D\{3y_{[n]}\} + D^2\{ \frac{1}{2}x_{[n]} - 3y_{[n]}\}
-\]
-\[
-y_{[n]} = -5x_{[n]} + 3y_{[n-1]} + \frac{1}{2}x_{[n-2]} - 3y_{[n-2]}
-\]
-\[
-  3y_{[n-2]} - 3y_{[n-1]} + y_{[n]} = \frac{1}{2} x_{[n-2]} - 5x_{[n]}
-\]
-
+    \begin{align*}
+      y_{[n]} &= -5y_{[n]} + D\{3y_{[n]}\} + D^2\{ \frac{1}{2}x_{[n]} - 3y_{[n]}\}\\
+      y_{[n]} &= -5x_{[n]} + 3y_{[n-1]} + \frac{1}{2}x_{[n-2]} - 3y_{[n-2]}\\
+      3y_{[n-2]} - 3y_{[n-1]} + y_{[n]} &= \frac{1}{2} x_{[n-2]} - 5x_{[n]}\\
+    \end{align*}
 
 \end{enumerate}
 
