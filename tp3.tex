@@ -3,6 +3,7 @@
 \usepackage{enumitem} %permite el uso de letras para enumerar
 \usepackage{graphicx} %para las imagenes
 \usepackage{float} %para fijar las imagenes
+\usepackage{amsmath} %para alinear ecuacines
 
 \usepackage{tikz} %Libreria para graficos
 \usetikzlibrary{calc, arrows.meta, positioning}
@@ -212,16 +213,22 @@ inmediatamente después del depósito en el periodo.
 
     $$y[n] = x[n] + r \cdot y[n-1]$$
 
-    Haciendo $r = 1.1$, obtenemos el siguiente grafico:
+    Podemos identificar un modelo recursivo en la ecuación, desarrollando un poco más obtenemos:
+    \begin{align*}
+      y[n-1] &= x[n-1] + r \cdot y[n-2]\\[6pt]
+      y[n-2] &= x[n-2] + r \cdot y[n-3]\\[6pt]
+      y[n-3] &= x[n-3] + r \cdot y[n-4]
+    \end{align*}
+    Que sustituyendo en las previas:
+    $$y[n] = x[n] + r \cdot (x[n-1] + r \cdot(x[n-2] + r \cdot(x[n-3] + r \cdot y[n-4])))$$
+    Distribuyendo "r":
+      $$y[n] = x[n] + r \cdot x[n-1] + r^2 \cdot x[n-2] + r^3 \cdot x[n-3] + r^4 \cdot y[n-4]$$
+    Está ecuación se puede reescribir como la siguiente serie geométrica:
+    $$y(n)= \sum_{k=0}^n r^k \cdot x[n-k]$$
+    Como el factor que multiplica a r, es decir, x[n] es constante, se puede tratar como tal y la solución a la serie
+    para un r generico es:
 
-    \begin{figure}[H]
-      \centering
-      \begin{minipage}{0.55\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{./images/ej3.1.png}
-        \textit{Saldo para un periodo de capitalización de 12 meses}
-      \end{minipage}
-    \end{figure}
+    $$y(n)= x[n] \cdot \frac{1-r^{n+1}}{1-r}$$
 
   %Apartado c
   \item \fs{} Representar la ecuación en diferencias por medio de un diagrama de bloques con retardos unitarios.
@@ -242,7 +249,7 @@ inmediatamente después del depósito en el periodo.
       \node [circleNode, right=1cm of sum1] (nodo1) {};
       \node [squaredNode, above=1cm of sum1] (multi1) {10};
       \node [right=2.3cm of sum1] (output) {$y[n]$};
-      \node [squaredNode, below=0.7cm of int1] (multi2) {1.1};
+      \node [squaredNode, below=0.7cm of int1] (multi2) {r};
 
       \draw [myLine] (input) -- (1.994, 2.88);
       \draw [->] (1.98,2.88) -- (multi1);
@@ -259,10 +266,17 @@ inmediatamente después del depósito en el periodo.
   %Apartado d
   \item \fs{} Evaluar el saldo para un periodo de capitalización de 48 meses.
 
-    Para un periodo de capitalizacion de 48 meses, se haria $n=48$ y la ecuacion de diferencias quedaria:
-      $$y[48] = x[48] + 1.1 \cdot y[47]$$
-      $$y[48] = 10 + 1.1 \cdot 9601.7234$$
-      $$y[48] = 10571.896$$
+    Para un periodo de capitalizacion de 48 meses, se haria $n=48$ y la ecuacion resultante quedaria:
+    \begin{align*}
+      y[n] &= x[n] \cdot \frac{1-r^{n+1}}{1-r}\\
+      y[48] &= x[48] \cdot \frac{1-r^{48+1}}{1-r}
+    \end{align*}
+    Suponiendo un $r=1{,}1$ el saldo resultaría:
+    \begin{align*}
+      y[48] &= x[48] \cdot \frac{1-1,1^{48+1}}{1-1,1}\\
+      y[48] &= 10 \cdot \frac{1-1,1^{49}}{-0,1}\\
+      y[48] &= 10.571,89
+    \end{align*}
 \end{enumerate}
 
 \chapter{Ejercicio 4}
