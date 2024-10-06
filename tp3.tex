@@ -3,7 +3,6 @@
 \usepackage{enumitem} %permite el uso de letras para enumerar
 \usepackage{graphicx} %para las imagenes
 \usepackage{float} %para fijar las imagenes
-\usepackage{amsmath} %para centrar ecuaciones
 
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning} %para hacer diagramas de bloques
@@ -343,14 +342,101 @@ depósito mensual constante en el mes $n$ de \$10, $r$ es la tasa de interés en
 inmediatamente después del depósito en el periodo.
 
 \begin{enumerate}[label=\alph*), left=0pt]
-  \item \fs{} Identificar en el problema las variables de entrada y salida del mismo.
-    % graficar sistema
 
+  % Apartado a
+  \item \fs{} Identificar en el problema las variables de entrada y salida del mismo.
+    \begin{figure}[h]
+      \centering
+      \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
+        \tikzstyle{block} = [draw, rectangle, minimum height=3em, minimum width=5em]
+
+        % Definición de nodos
+        \node at (0,0) [coordinate] (input) {}; % Nodo de entrada x(n)
+        \node [block, right=2cm of input] (sistema) {$sistema$};
+        \node [coordinate, right=2cm of sistema] (output) {}; % Nodo de salida y(n)
+
+        \draw[->] (input) -- node{$x_{[n]}$}(sistema);
+        \draw[->] (sistema) -- node {$y_{[n]}$} (output);
+
+        \end{tikzpicture}
+    \end{figure}
+
+    La variable de entrada seria el deposito mensual, en este caso constante, $x_{[n]} = 10\mu_n$.
+
+    La variable de salida seria el ahorro acumulado hasta el mes $n$, $y_{[n]}$.
+  %Apartado b
   \item \fs{} Plantear un modelo en ecuaciones de diferencias capaz de caracterizar el sistema propuesto.
 
+    El modelo en ecuaciones de diferencias que se plantea es el siguiente:
+
+    $$y_{[n]} = x_{[n]} + r \cdot y_{[n-1]}$$
+
+    Podemos identificar un modelo recursivo en la ecuación, desarrollando un poco más obtenemos:
+    \begin{align*}
+      y_{[n-1]} &= x_{[n-1]} + r \cdot y_{[n-2]}\\[6pt]
+      y_{[n-2]} &= x_{[n-2]} + r \cdot y_{[n-3]}\\[6pt]
+      y_{[n-3]} &= x_{[n-3]} + r \cdot y_{[n-4]}
+    \end{align*}
+    Que sustituyendo en las previas:
+    $$y_{[n]} = x_{[n]} + r \cdot (x_{[n-1]} + r \cdot(x_{[n-2]} + r \cdot(x_{[n-3]} + r \cdot y_{[n-4]})))$$
+    Distribuyendo "r":
+    $$y_{[n]} = x_{[n]} + r \cdot x_{[n-1]} + r^2 \cdot x_{[n-2]} + r^3 \cdot x_{[n-3]} + r^4 \cdot y_{[n-4]}$$
+    Está ecuación se puede reescribir como la siguiente serie geométrica:
+    $$y_{[n]}= \sum_{k=0}^n r^k \cdot x_{[n-k]}$$
+    Como el factor que multiplica a r, es decir, $x_{[n]}$ es constante, se puede tratar como tal y la solución a la serie
+    para un r generico es:
+
+    $$y_{[n]}= x_{[n]} \cdot \frac{1-r^{n+1}}{1-r}$$
+
+  %Apartado c
   \item \fs{} Representar la ecuación en diferencias por medio de un diagrama de bloques con retardos unitarios.
 
+  \begin{center}
+    \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
+      \tikzstyle{squaredNode} = [rectangle, draw=black, minimum height = 1cm, minimum width = 1cm]
+      \tikzstyle{circleNode} = [circle, draw=black, fill=black, minimum size = 0.1mm, inner sep = 1pt]
+      \tikzstyle{circleSum} = [circle, draw=black, minimum size = 1mm]
+      \tikzstyle{myLine} = [draw=black, thick, solid]
+      \tikzstyle{nodo} = [draw=black, fill=black, thick]
+
+      % Definición de nodos
+      %\node at (0,0) (input) {};
+      \node at (0,0) [squaredNode] (int1) {D};
+      \node [above=2cm of int1] (input) {$x_{[n]}$};
+      \node [circleSum, right=1cm of int1] (sum1) {$\sum$};
+      \node [circleNode, right=1cm of sum1] (nodo1) {};
+      \node [squaredNode, above=1cm of sum1] (multi1) {10};
+      \node [right=2.3cm of sum1] (output) {$y_{[n]}$};
+      \node [squaredNode, below=0.7cm of int1] (multi2) {r};
+
+      \draw [myLine] (input) -- (1.994, 2.88);
+      \draw [->] (1.98,2.88) -- (multi1);
+      \draw [->] (multi1) -- (sum1);
+      \draw [->] (int1) -- (sum1);
+      \draw [->] (sum1) -- (output);
+      \draw [myLine] (nodo1) -- (3.55,-3) -- (-0.014,-3);
+      \draw [->] (0,-3) -- (multi2);
+      \draw [->] (multi2) -- (int1);
+
+    \end{tikzpicture}
+  \end{center}
+
+  %Apartado d
   \item \fs{} Evaluar el saldo para un periodo de capitalización de 48 meses.
+
+    Para un periodo de capitalizacion de 48 meses, se haria $n=48$ y se utilizaria la serie geometrica desarrollada en 
+    el apartado b, quedando:
+
+    \begin{align*}
+      y_{[n]} &= x_{[n]} \cdot \frac{1-r^{n+1}}{1-r}\\
+      y_{[48]} &= x_{[48]} \cdot \frac{1-r^{48+1}}{1-r}
+    \end{align*}
+    Suponiendo un $r=1{,}1$ el saldo resultaría:
+    \begin{align*}
+      y_{[48]} &= x_{[48]} \cdot \frac{1-(1,1)^{48+1}}{1-1,1}\\
+      y_{[48]} &= 10 \cdot \frac{1-(1,1)^{49}}{-0,1}\\
+      y_{[48]} &= 10.571,89
+    \end{align*}
 \end{enumerate}
 
 \chapter{Ejercicio 4}
