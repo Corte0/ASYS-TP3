@@ -570,12 +570,13 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
 
     Utilizando la ec. (\ref{s.fourier.discreta}) tenemos:
     \[
-      a_k = \frac{1}{3} \sum_{n=0}^{3-1} \left(1 + cos\left(\frac{\pi n}{3}\right) \right) \cdot e^{-j\frac{2 \pi k n}{N}}
+      a_k = \frac{1}{6} \sum_{n=0}^{6-1} \left(1 + cos\left(\frac{\pi n}{3}\right) \right) \cdot e^{-j\frac{2 \pi k n}{6}}
     \]
 
-    Para llevar a cabo esta sumatoria, nuevamente, es recomendable expandirla termino a termino, ya que si pasamos el coseno a su
-    forma compleja, y usamos la simplificacion de la serie geometrica (\ref{s.geometrica}), todos los terminos terminan
-    valiendo cero.
+    Para llevar a cabo esta sumatoria, nuevamente, es recomendable expandirla termino a termino. Resolviendo
+    algebraicamente:
+
+
     \begin{align*}
       a_k = \frac{1}{6} \left(2 + \frac{3}{2} e^{-j\frac{\pi k}{3}} + \frac{1}{2} e^{-j\frac{2 \pi k}{3}} + 
         \frac{1}{2} e^{-j\frac{4 \pi k}{3}} + \frac{3}{2} e^{-j\frac{5 \pi k}{3}}\right)\\
