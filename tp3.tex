@@ -497,45 +497,52 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
 Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencias:
 
 \[
-y[n] - 1.2 y[n-1] - 0.13 y[n-2] - 0.36 y[n-3] = x[n]
+  y_{[n]} - 1.2 y_{[n-1]} - 0.13 y_{[n-2]} - 0.36 y_{[n-3]} = x_{[n]}
 \]
 
 \begin{enumerate}[label=\alph*), left=0pt]
-  \item Determinar $Y(z) = \mathcal{Z}\{y[n]\}$, la solución completa, con las siguientes condiciones iniciales:
+  \item Determinar $Y(z) = \mathcal{Z}\{y_{[n]}\}$, la solución completa, con las siguientes condiciones iniciales:
 
     \[
-    y[-1] = 1, \quad y[-2] = -1, \quad y[-3] = 1
+      y_{[-1]} = 1, \quad y_{[-2]} = -1, \quad y_{[-3]} = 1
     \]
 
-    Despejando $y[n]$:
-    $$y[n] = x[n] + 1.2 y[n-1] + 0.13 y[n-2] + 0.36 y[n-3] $$
-    Y aplicando las propiedades de linealidad y atraso de la transformada Z:
+    Despejando $y_{[n]}$:
+    $$y_{[n]} = x_{[n]} + 1.2 y_{[n-1]} + 0.13 y_{[n-2]} + 0.36 y_{[n-3]} $$
+    Y aplicando las propiedades de linealidad y deslplazamiento temporal de la transformada Z:
 
     \begin{align*}
-      Y[z] &= X[z] + 1.2 ( Y[z]z^{-1} + y[-1]) + 0.13 ( Y[z]z^{-2} + y[-1]z^{-1} + y[-2]) +\\
-           &\hspace{20mm} 0.36 (Y[z]z^{-3} + y[-1]z^{-2} +y[-2]z^{-1} + y[-3])\\
-      Y[z] &= X[z] + 1.2 ( Y[z]z^{-1} + 1) + 0.13 ( Y[z]z^{-2} + z^{-1} - 1) + 0.36 (Y[z]z^{-3} + z^{-2} - z^{-1} + 1)\\
-      Y[z] &= X[z] + 1.2 Y[z]z^{-1}  + 0.13 Y[z]z^{-2} + 1.43 + 0.36Y[z]z^{-3} + 0.36z^{-2} - 0.23 z^{-1} \\
+      Y_{(z)} &= X_{(z)} + 1.2 ( Y_{[z]} z^{-1} + y_{[-1]} ) + 0.13 ( Y_{[z]} z^{-2} + y_{[-1]} z^{-1} + y_{[-2]} ) +\\
+           &\hspace{20mm} 0.36 (Y_{[z]}z^{-3} + y_{[-1]}z^{-2} +y_{[-2]} z^{-1} + y_{[-3]})\\
+      Y_{(z)} &= X_{(z)} + 1.2 ( Y_{[z]}z^{-1} + 1) + 0.13 ( Y_{[z]}z^{-2} + z^{-1} - 1) + 0.36 (Y_{[z]}z^{-3} + z^{-2} - z^{-1} + 1)\\
+      Y_{(z)} &= X_{(z)} + 1.2 Y_{[z]}z^{-1}  + 0.13 Y_{[z]}z^{-2} + 1.43 + 0.36Y_{[z]}z^{-3} + 0.36z^{-2} - 0.23 z^{-1} \\
     \end{align*}
     \begin{align*}
-      Y[z] - 0.36Y[z]z^{-3} - 0.13 Y[z]z^{-2} - 1.2 Y[z]z^{-1} &= X[z] + 1.43 + 0.36z^{-2} - 0.23 z^{-1}\\
-      Y[z] (1 - 0.36z^{-3} - 0.13 z^{-2} - 1.2 z^{-1}) &= X[z] + z^{-3} + 1.43 + 0.36z^{-2} - 0.23 z^{-1}\\
-      Y[z]  &= \frac{X[z] + 1.43 + z^{-3} + 0.36z^{-2} - 0.23 z^{-1}}{(1 - 0.36z^{-3} - 0.13 z^{-2} - 1.2 z^{-1})}\\
+      Y_{(z)} - 0.36Y_{[z]}z^{-3} - 0.13 Y_{[z]}z^{-2} - 1.2 Y_{[z]}z^{-1} &= X_{(z)} + 1.43 + 0.36z^{-2} - 0.23 z^{-1}\\
+      Y_{(z)} (1 - 0.36z^{-3} - 0.13 z^{-2} - 1.2 z^{-1}) &= X_{(z)} + z^{-3} + 1.43 + 0.36z^{-2} - 0.23 z^{-1}\\
+      Y_{(z)}  &= \frac{X_{(z)} + 1.43 + z^{-3} + 0.36z^{-2} - 0.23 z^{-1}}{(1 - 0.36z^{-3} - 0.13 z^{-2} - 1.2 z^{-1})}\\
     \end{align*}
 
   \item \fs{} Obtener la función de transferencia $H(z)$, respuesta al impulso con condiciones iniciales nulas, por
     medio de residuos.
 
-  \item \fs{} Obtener $h[n] = \mathcal{Z}^{-1}\{H(z)\}$.
+    Teniendo en cuenta CI nulas para la expresión previamente obtenida de $Y_{[z]}$
+
+    $$Y_{(z)} = X_{(z)} + 1.2 Y_{[z]} z^{-1} + 0.13 Y_{[z]} + 0.36 Y_{[z]}z^{-3}$$
+    $$Y_{(z)} - 1.2 Y_{[z]} z^{-1} - 0.13 Y_{[z]} - 0.36 Y_{[z]}z^{-3} = X_{(z)}$$
+    $$Y_{(z)} (1 - 1.2 z^{-1} - 0.13 - 0.36 z^{-3}) = X_{(z)}$$
+    $$Y_{(z)}  = \frac{X_{(z)}}{(1 - 1.2 z^{-1} - 0.13 - 0.36 z^{-3})}$$
+
+  \item \fs{} Obtener $h_{[n]} = \mathcal{Z}^{-1}\{H_{(z)}\}$.
 
   \item \fs{} Obtener la respuesta al escalón unitario con condiciones iniciales nulas, por medio de fracciones 
-    parciales $y[n] = \mathcal{Z}^{-1}\{Y(z)\}$.
+    parciales $y_{[n]} = \mathcal{Z}^{-1}\{Y_{(z)}\}$.
 
-  \item \fs{} Obtener $y[n] = \mu[n] * h[n]$, la respuesta al escalón unitario sin condiciones iniciales por medio de la
+  \item \fs{} Obtener $y_{[n]} = \mu_{[n]} * h_{[n]}$, la respuesta al escalón unitario sin condiciones iniciales por medio de la
     convolución temporal.
 
-  \item \fs{} Verificar $y[n]$ para la respuesta al escalón unitario por división directa hasta la quinta muestra y
-    reconstruir $Y(z) = \mathcal{Z}\{y[n]\}$.
+  \item \fs{} Verificar $y_{[n]}$ para la respuesta al escalón unitario por división directa hasta la quinta muestra y
+    reconstruir $Y_{(z)} = \mathcal{Z}\{y_{[n]}\}$.
 
   \item \fs{} Verificar el régimen transitorio (TVI) y el régimen de estado permanente (TVF) en ambos dominios 
     $\{z, n\}$ para la respuesta al escalón unitario con condiciones iniciales nulas.
