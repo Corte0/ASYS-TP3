@@ -567,9 +567,9 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
     x[n] = 1 + \cos \left( \frac{2\pi n}{3} \right)
     \]
 
-    %insertar imagen de la onda muesteada, chupala
+    %insertar imagen de la onda muestreada, chúpala
 
-    La serie de fourier discreta esta definida como:
+    La serie de Fourier discreta está definida como:
     \begin{equation}
       x[n] = \sum_{k=0}^{N-1} a_k \cdot e^{j\frac{2 \pi k n}{N}}
     \end{equation}
@@ -585,8 +585,8 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
       a_k = \frac{1}{3} \sum_{n=0}^{3-1} \left(1 + cos\left(\frac{2 \pi n}{3}\right) \right) \cdot e^{-j\frac{2 \pi k n}{N}}
     \]
 
-    Para llevar a cabo esta sumatoria, es recomendable expandirla termino a termino, ya que si pasamos el coseno a su
-    forma compleja, y usamos la simplificacion de la serie geometrica (\ref{s.geometrica}), todos los terminos terminan
+    Para llevar a cabo esta sumatoria, es recomendable expandirla termino a término, ya que si pasamos el coseno a su
+    forma compleja, y usamos la simplificación de la serie geométrica (\ref{s.geometrica}), todos los términos terminan
     valiendo cero.
     \begin{align*}
       a_k &= \frac{1}{3} \left(\left(1 + cos\left(0\right) \right) e^0 +
@@ -596,8 +596,8 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
         a_k &= \frac{2}{3} + \frac{1}{6} \left(e^{-j\frac{2 \pi k}{3}} + e^{-j\frac{4 \pi k}{3}}\right)
     \end{align*}
 
-    Teniendo la expresion de $a_k$, la obtencion de su espectro es tan simple como obtener su modulo y fase.\\
-    Para el modulo, usamos la expresion:
+    Teniendo la expresión de $a_k$, la obtención de su espectro es tan simple como obtener su modulo y fase.\\
+    Para el módulo, usamos la expresión:
     \begin{equation}
       \label{modulo}
       |z| = \sqrt{Re(z)^2 + Im(z)^2}
@@ -652,14 +652,14 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
     x[n] = 1 + \cos \left( \frac{\pi n}{3} \right)
     \]
 
-    %insertar imagen de la onda muesteada, chupala 2, la saga completa
+    %insertar imagen de la onda muestreada, chúpala 2, la saga completa
 
     Utilizando la ec. (\ref{s.fourier.discreta}) tenemos:
     \[
       a_k = \frac{1}{6} \sum_{n=0}^{6-1} \left(1 + cos\left(\frac{\pi n}{3}\right) \right) \cdot e^{-j\frac{2 \pi k n}{6}}
     \]
 
-    Para llevar a cabo esta sumatoria, nuevamente, es recomendable expandirla termino a termino. Resolviendo
+    Para llevar a cabo esta sumatoria, nuevamente, es recomendable expandirla termino a término. Resolviendo
     algebraicamente:
 
 
@@ -670,7 +670,7 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
         \frac{1}{12} e^{-j\frac{4 \pi k}{3}} + \frac{1}{4} e^{-j\frac{5 \pi k}{3}}
     \end{align*}
 
-    Teniendo la expresion de $a_k$, la obtencion de su espectro es tan simple como obtener su modulo (\ref{modulo}) y
+    Teniendo la expresión de $a_k$, la obtención de su espectro es tan simple como obtener su modulo (\ref{modulo}) y
     fase (\ref{fase}).\\
 
     \begin{figure}[H]
@@ -700,9 +700,9 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
       \end{minipage}
     \end{figure}
 
-    Nos encontramos con la peculiaridad de que el diagrama de fases no respeta con la clausula de "periodica de periodo N".
-    Es por eso que se tomo la iniciativa de hacer una herramienta en la plataforma Desmos para ver en donde estaba el error.
-    La herramienta devolvio los siguientes graficos:
+    Nos encontramos con la peculiaridad de que el diagrama de fases no respeta con la cláusula de "periódica de periodo N".
+    Es por eso por lo que se tomó la iniciativa de hacer una herramienta en la plataforma Desmos para ver en donde estaba el error.
+    La herramienta devolvió los siguientes gráficos:
 
     \begin{figure}[H]
       \centering
@@ -720,7 +720,7 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
       \end{minipage}
     \end{figure}
 
-    No fuimos capaces de determinar donde estaba el error.
+    No fuimos capaces de determinar dónde estaba el error.
 
 \end{enumerate}
 
