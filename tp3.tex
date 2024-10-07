@@ -691,8 +691,8 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
        \node [block,on grid,left=2cm of sum2] (differentiator2) {$D$}; % Second delay block (D)
        \node [sum, on grid,left=2cm of differentiator2] (sum3) {$\sum$}; % Sum node
        \node [block,on grid,left=2cm of sum3] (differentiator3) {$D$}; % Third delay block (D)
-       \node [block,on grid,below=1.5cm of differentiator1] (gain1) {$1.2$}; % Gain block for 1.2
-       \node [block,on grid,below=1.5cm of differentiator2] (gain2) {$0.13$}; % Gain block for 0.13
+       \node [block,on grid,below=1.5cm of sum2] (gain1) {$1.2$}; % Gain block for 1.2
+       \node [block,on grid,below=1.5cm of sum3] (gain2) {$0.13$}; % Gain block for 0.13
        \node [block,on grid,below=1.5cm of differentiator3] (gain3) {$0.36$}; % Gain block for 0.36
        \node [connector,on grid,right=1cm of sum1] (c0) {};
        \node [connector,on grid,below=1cm of gain1] (c1) {};
@@ -705,10 +705,10 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
        \draw[->] (sum1) -- node{$y_n(n)$} (output); % sum1 to output y[n]
       %\draw[->] (yn) -- ++(2cm,0) node[right] {$y[n]$}; % Output y[n]
        \draw[->] (differentiator1) -- (sum1); % Delay D1 to sum1
-       \draw[->] (gain1) -- (differentiator1); % Gain 1.2 to differentiator1
+       \draw[->] (gain1) -- (sum2); % Gain 1.2 to differentiator1
        \draw[->] (differentiator2) -- (sum2); % Delay D2 to D1
        \draw[->] (sum2) -- (differentiator1); % Delay D2 to D1
-       \draw[->] (gain2) -- (differentiator2); % Gain 0.13 to differentiator2
+       \draw[->] (gain2) -- (sum3); % Gain 0.13 to differentiator2
        \draw[->] (differentiator3) -- (sum3); % Delay D3 to D2
        \draw[->] (sum3) -- (differentiator2); % Delay D3 to D2
        \draw[->] (gain3) -- (differentiator3); % Gain 0.36 to differentiator3
