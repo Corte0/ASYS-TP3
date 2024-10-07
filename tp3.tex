@@ -594,25 +594,40 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
     $$Y_{(z)}  = \frac{\frac{z}{z-1}}{(1 - 1.2 z^{-1} - 0.13 - 0.36 z^{-3})}$$
     Multiplicando y dividiendo por $z^3$, y luego resolviendo:
     \begin{align*}
-      Y_{(z)} &= \frac{z^4}{(z-1)(z^3 - 1.2 z^2 - 0.13 z - 0.36)}\\
-      Y_{(z)} &= \frac{z^4}{(z-1)(z-1.4584)(z+0.1292-0.4797i)(z+0.1291+0.4797i)}\\
-      Y_{(z)} &= \frac{A}{z-1} + \frac{B}{z-1.4584}+ \frac{C}{z+0.1292-0.4797i}+\frac{D}{z+0.1291+0.4797i}
+      Y_{(z)} &= \frac{z^4}{(z - 1)(z^3 - 1.2 z^2 - 0.13 z - 0.36)}\\
+      Y_{(z)} &= \frac{z^4}{(z - 1)(z - 1.4584)(z + 0.1292 - j0.4797)(z + 0.1291 + j0.4797)}\\
+      Y_{(z)} &= \frac{A}{z - 1} + \frac{B}{z - 1.4584} + \frac{C}{z + 0.1292 - j0.4797} + \frac{D}{z + 0.1291 + j0.4797}
     \end{align*}
     Resolviendo los coeficientes obtenemos:
     \begin{align*}
-      A = -1.4493-0.020i \quad
-      B = 3.5878+0.037i \quad
-      C = 0.030 - 0.005i \quad
-      D = 0.034 + 0.006i
+      A = -1.4493 \quad
+      B = 3.5878 \quad
+      C = 0.0307 - j0.0056 \quad
+      D = 0.0307 + j0.0056
     \end{align*}
-    Finalmente reemplazando en la $Y_{(z)}$, y aplicando la antitransformada:
-     $$ Y_{(z)} = 1 + \frac{-1.4493-0.020}{z+(-1)} + \frac{3.5878+0.037i}{z+(-1.4584)}+
-                \frac{0.030 - 0.005i}{z+(0.129+0.48i)}+\frac{0.034 + 0.006i}{z+(0.129-0.498i)} $$
-       $$ y_{(n)} = \delta_{(n)} + (-1.4493 - 0.020j) \cdot (-1)^n \cdot u_{(n)} +
-              (3.5878 + 0.037j) \cdot (1.4584)^n \cdot (-1)^n \cdot u_{(n)} + $$
-      $$ (0.030 - 0.005j) \cdot (0.5123)^n \cdot (\cos(1.274n) + j\sin(1.274n)) \cdot u_{(n)} +
-              (0.034 + 0.006j) \cdot (0.5123)^n \cdot (\cos(1.274n) $$
-      $$ - j\sin(1.274n)) \cdot u_{(n)} $$
+    Finalmente reemplazando en la $Y_{(z)}$:
+    \begin{equation*}
+      Y_{(z)} = \frac{-1.4493}{z - 1} + \frac{3.5878}{z - 1.4584} + \frac{0.0307 - j0.0056}{z + (0.1292 + j0.4797)} +
+        \frac{0.0307 + j0.0056}{z + (0.1292 - j0.4797)}\\
+    \end{equation*}
+    Realizando la antitransformada por primitivas, donde:
+    \begin{equation}
+      \mathbb{Z}^{-1} \left\{ \frac{A}{z-a}\right\} = A a^{n-1} \mu_{[n]}
+    \end{equation}
+
+    Tenemos entonces:
+    \begin{align*}
+      y_{[n]} &= \big((-1.4493) + 3.5878 (1.4584)^{n-1} + (0.0307 - j0.0056)(0.1292 + j0.4797)^{n-1} +\\
+              &\hspace{6mm}(0.0307 + j0.0056)(0.1929 - j0.4797)^{n-1} \big) \mu_{[n]}
+    \end{align*}
+
+    %\begin{align*}
+    %  y_{(n)} =& \delta_{(n)} + \Big((-1.4493 - 0.020j) \cdot (-1)^n + (3.5878 + 0.037j) \cdot (1.4584)^n \cdot (-1)^n +\\[2pt]
+    %           &(0.030 - 0.005j) \cdot (0.5123)^n \cdot e^{-j1.274n} + (0.034 + 0.006j) \cdot (0.5123)^n \cdot 
+    %            e^{-j1.274n} \Big) \cdot u_{(n)}\\
+    %    y_{[n]} =& \delta_{[n]} + \Big((-1)^n ((-1.4993 - 0.020j) + (3.5878 + 0.037j) \cdot (1.4584)^n) +\\[2pt]
+    %             &(0.5123)^n \cdot e^{-j1.274n} (0.0640 + 0.0010j)\Big) \cdot u_{(n)}
+    %\end{align*}
 
   \item \fs{} Obtener $y_{[n]} = \mu_{[n]} * h_{[n]}$, la respuesta al escalón unitario sin condiciones iniciales por medio de la
     convolución temporal.
@@ -671,6 +686,43 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
 
   \item \fs{} Verificar el régimen transitorio (TVI) y el régimen de estado permanente (TVF) en ambos dominios 
     $\{z, n\}$ para la respuesta al escalón unitario con condiciones iniciales nulas.
+    
+    El teorema del valor inicial indica que:
+    \begin{equation}
+      \lim_{z \to \infty} Y_{[z]} = y_{[0]}
+    \end{equation}
+
+    Aplicando el teorema a la respuesta del escalon unitarion en $z$:
+    \begin{align*}
+      y_{[0]} &= \lim_{z \to \infty} Y(z)\\
+      y_{[0]} &= \lim_{z \to \infty} \frac{z^4}{(z - 1)(z^3 - 1.2 z^2 - 0.13 z - 0.36)}\\
+      y_{[0]} &= \lim_{z \to \infty} \frac{z^4}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23 z + 0.36}\\
+      y_{[0]} &= \frac{\infty^4}{\infty^4 - 2.2 \infty^3 + 1.07 \infty^2 - 0.23 \infty + 0.36}\\
+      y_{[0]} &= 1
+    \end{align*}
+    
+    Valuando la funcion $y_{[n]}$ da un numero muy proximo a 1. Suponemos que el error esta dado por el truncamiento de
+    los decimales despues de la coma.
+
+    El teorema del valor final indica que:
+    \begin{equation}
+      \lim_{z \to 1} (1 - z^{-1}) Y_{[z]} = y_{[\infty]}
+    \end{equation}
+
+    Aplicando el teorema a la respuesta del escalon unitarion en $z$:
+    \begin{align*}
+      y_{[\infty]} &= \lim_{z \to 1} (1 - z^{-1}) Y(z)\\
+      y_{[\infty]} &= \lim_{z \to 1} \frac{(1 - z^{-1}) z^4}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23 z + 0.36}
+    \end{align*}
+
+    Una indeterminacion del tipo $\frac{0}{0}$ que requiere reacomodar los terminos para salvar la indeterminacion:
+    \begin{align*}
+      y_{[\infty]} &= \lim_{z \to 1} \frac{(z - 1) z^3}{(z - 1)(z^3 - 1.2 z^2 - 0.13 z - 0.36)}\\
+      y_{[\infty]} &= \lim_{z \to 1} \frac{z^3}{z^3 - 1.2 z^2 - 0.13 z - 0.36}\\
+      y_{[\infty]} &= -\frac{100}{69}
+    \end{align*}
+
+    Lo cual no coincide con lo que da la funcion en $\infty$, la cual diverge por los numeros elevados a n.
 
   \item \fs{} Elaborar la síntesis del sistema por medio de diagrama de bloques con retardos unitarios.
 
