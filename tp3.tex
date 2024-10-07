@@ -590,15 +590,17 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
        \node [sum, on grid,below=1.5cm of elbowInput1] (sum1) {$\sum$}; % Sum node
        \node [coordinate, on grid,right=3cm of sum1] (output) {}; % Output coordinate
        \node [block,on grid,left=2cm of sum1] (differentiator1) {$D$}; % First delay block (D)
-       \node [block,on grid,left=2cm of differentiator1] (differentiator2) {$D$}; % Second delay block (D)
-       \node [block,on grid,left=2cm of differentiator2] (differentiator3) {$D$}; % Third delay block (D)
+       \node [sum, on grid,left=2cm of differentiator1] (sum2) {$\sum$}; % Sum node
+       \node [block,on grid,left=2cm of sum2] (differentiator2) {$D$}; % Second delay block (D)
+       \node [sum, on grid,left=2cm of differentiator2] (sum3) {$\sum$}; % Sum node
+       \node [block,on grid,left=2cm of sum3] (differentiator3) {$D$}; % Third delay block (D)
        \node [block,on grid,below=1.5cm of differentiator1] (gain1) {$1.2$}; % Gain block for 1.2
        \node [block,on grid,below=1.5cm of differentiator2] (gain2) {$0.13$}; % Gain block for 0.13
        \node [block,on grid,below=1.5cm of differentiator3] (gain3) {$0.36$}; % Gain block for 0.36
        \node [connector,on grid,right=1cm of sum1] (c0) {};
        \node [connector,on grid,below=1cm of gain1] (c1) {};
        \node [connector,on grid,below=1cm of gain2] (c2) {};
-       \node [connector,on grid,below=1cm of gain3] (c3) {};
+       \node [coordinate, on grid,below=1cm of gain3] (elbowOutput2) {}; % Elbow connection for input
        \node [coordinate, on grid,below=2.5cm of c0] (elbowOutput1) {}; % Elbow connection for input
        % Connections
        \draw[-] (input) -- node{$x_n(n)$} (elbowInput1); % Input to signal1
@@ -607,17 +609,19 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
       %\draw[->] (yn) -- ++(2cm,0) node[right] {$y[n]$}; % Output y[n]
        \draw[->] (differentiator1) -- (sum1); % Delay D1 to sum1
        \draw[->] (gain1) -- (differentiator1); % Gain 1.2 to differentiator1
-       \draw[->] (differentiator2) -- (differentiator1); % Delay D2 to D1
+       \draw[->] (differentiator2) -- (sum2); % Delay D2 to D1
+       \draw[->] (sum2) -- (differentiator1); % Delay D2 to D1
        \draw[->] (gain2) -- (differentiator2); % Gain 0.13 to differentiator2
-       \draw[->] (differentiator3) -- (differentiator2); % Delay D3 to D2
+       \draw[->] (differentiator3) -- (sum3); % Delay D3 to D2
+       \draw[->] (sum3) -- (differentiator2); % Delay D3 to D2
        \draw[->] (gain3) -- (differentiator3); % Gain 0.36 to differentiator3
        \draw[-] (c0) -- (elbowOutput1);
        \draw[-] (elbowOutput1) -- (c1);
        \draw[-] (c1) -- (c2);
-       \draw[-] (c2) -- (c3);
+       \draw[-] (c2) -- (elbowOutput2);
        \draw[-] (c1) -- (gain1);
        \draw[-] (c2) -- (gain2);
-       \draw[-] (c3) -- (gain3);
+       \draw[-] (elbowOutput2) -- (gain3);
 
       \end{tikzpicture}
     \end{center}
