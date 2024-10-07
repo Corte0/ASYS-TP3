@@ -576,6 +576,52 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
     $\{z, n\}$ para la respuesta al escalón unitario con condiciones iniciales nulas.
 
   \item \fs{} Elaborar la síntesis del sistema por medio de diagrama de bloques con retardos unitarios.
+
+    \begin{center}
+
+      \begin{tikzpicture}[auto, node distance=2cm, >=Stealth, thick]
+        % Definición de estilos para los bloques y sumador
+        \tikzstyle{block} = [draw, rectangle, minimum height=1.5em, minimum width=3em]
+        \tikzstyle{sum} = [draw, circle, inner sep=1pt, minimum size=1cm, node distance=2cm]
+        \tikzstyle{connector} = [draw, fill, circle, minimum size=4pt, inner sep=0pt] % Estilo para el punto de conexión
+       % Nodes
+       \node at (0,0) [coordinate] (input) {}; % Input
+       \node [coordinate, on grid,right=7cm of input] (elbowInput1) {}; % Elbow connection for input
+       \node [sum, on grid,below=1.5cm of elbowInput1] (sum1) {$\sum$}; % Sum node
+       \node [coordinate, on grid,right=3cm of sum1] (output) {}; % Output coordinate
+       \node [block,on grid,left=2cm of sum1] (differentiator1) {$D$}; % First delay block (D)
+       \node [block,on grid,left=2cm of differentiator1] (differentiator2) {$D$}; % Second delay block (D)
+       \node [block,on grid,left=2cm of differentiator2] (differentiator3) {$D$}; % Third delay block (D)
+       \node [block,on grid,below=1.5cm of differentiator1] (gain1) {$1.2$}; % Gain block for 1.2
+       \node [block,on grid,below=1.5cm of differentiator2] (gain2) {$0.13$}; % Gain block for 0.13
+       \node [block,on grid,below=1.5cm of differentiator3] (gain3) {$0.36$}; % Gain block for 0.36
+       \node [connector,on grid,right=1cm of sum1] (c0) {};
+       \node [connector,on grid,below=1cm of gain1] (c1) {};
+       \node [connector,on grid,below=1cm of gain2] (c2) {};
+       \node [connector,on grid,below=1cm of gain3] (c3) {};
+       \node [coordinate, on grid,below=2.5cm of c0] (elbowOutput1) {}; % Elbow connection for input
+       % Connections
+       \draw[-] (input) -- node{$x_n(n)$} (elbowInput1); % Input to signal1
+       \draw[->] (elbowInput1) -- (sum1); % Input to signal1
+       \draw[->] (sum1) -- node{$y_n(n)$} (output); % sum1 to output y[n]
+      %\draw[->] (yn) -- ++(2cm,0) node[right] {$y[n]$}; % Output y[n]
+       \draw[->] (differentiator1) -- (sum1); % Delay D1 to sum1
+       \draw[->] (gain1) -- (differentiator1); % Gain 1.2 to differentiator1
+       \draw[->] (differentiator2) -- (differentiator1); % Delay D2 to D1
+       \draw[->] (gain2) -- (differentiator2); % Gain 0.13 to differentiator2
+       \draw[->] (differentiator3) -- (differentiator2); % Delay D3 to D2
+       \draw[->] (gain3) -- (differentiator3); % Gain 0.36 to differentiator3
+       \draw[-] (c0) -- (elbowOutput1);
+       \draw[-] (elbowOutput1) -- (c1);
+       \draw[-] (c1) -- (c2);
+       \draw[-] (c2) -- (c3);
+       \draw[-] (c1) -- (gain1);
+       \draw[-] (c2) -- (gain2);
+       \draw[-] (c3) -- (gain3);
+
+      \end{tikzpicture}
+    \end{center}
+
 \end{enumerate}
 
 \end{document}
