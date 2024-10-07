@@ -684,9 +684,42 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
   \item \fs{} Verificar $y_{[n]}$ para la respuesta al escalón unitario por división directa hasta la quinta muestra y
     reconstruir $Y_{(z)} = \mathcal{Z}\{y_{[n]}\}$.
 
+    El metodo de división directa consiste en realizar sucesivas divisiones de polinomios convenientes con el objetivo de obtener
+    una expresion de la forma tal que se encutren los valores x[n] por analogía con la definición de la transformada Z
+
+    $$X_{[z]}=\sum_{n=0}^{\infty} x_{[n]} z^{-n}$$
+
+    Partimos de la expresión:
+
+    $$Y_{(z)} = \frac{z}{(z-1)(1 - 1.2 z^{-1} - 0.13 - 0.36 z^{-3})}$$
+    $$Y_{(z)} = \frac{z^4}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23 z + 0.36}$$
+
+    Dividimos considerando un cociente $\frac{z^4}{z^4}=1$
+
+    $$Y_{(z)} = 1 + \frac{ 2.2 z^3 - 1.07 z^2 - 0.23 z - 0.36}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23z + 0.36}$$
+
+    Dividimos considerando un cociente $\frac{-2.2z^3}{z^4}=2.2z^{-1}$
+
+    $$Y_{(z)} = 1 + 2.2z^{-1} + \frac{ 3.77 z^2 - 2.117 z - 0.146 z - 0.792 z^{-1}}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23z + 0.36}$$
+
+    Dividimos considerando un cociente $\frac{3.77z^2}{z^4}=3.77z^{-2}$
+
+    $$Y_{(z)} = 1 + 2.2z^{-1} + 3.77z^{-2} \frac{ 6.17 z - 3.88 + 0.078 z^{-1} - 1.357 z^{-2}}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23z + 0.36}$$
+
+    Dividimos considerando un cociente $\frac{6.17z^3}{z^4}=6.17z^{-3}$
+
+    $$Y_{(z)} = 1 + 2.2z^{-1} + 3.77z^{-2} + 6.17z^{-3} + \frac{ 9.77 z - 6.52z^{-1} + 0.062 z^{-2} - 2.221 z^{-3}}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23z + 0.36}$$
+
+    Dividimos considerando un cociente $\frac{9.77}{z^4}=9.77z^{-4}$
+
+    $$Y_{(z)} = 1 + 2.2z^{-1} + 3.77z^{-2} + 6.17z^{-3} + 9.77z^{-4} + ...$$
+
+    Obtenemos así por analogía los valores de $y_{[n]}$
+    $$y_{[0]}=1,\hspace{1cm} y_{[1]}=2.2,\hspace{1cm} y_{[2]}=3.77,\hspace{1cm} y_{[3]}=6.17,\hspace{1cm} y_{[4]}=9.77$$
+
   \item \fs{} Verificar el régimen transitorio (TVI) y el régimen de estado permanente (TVF) en ambos dominios 
     $\{z, n\}$ para la respuesta al escalón unitario con condiciones iniciales nulas.
-    
+
     El teorema del valor inicial indica que:
     \begin{equation}
       \lim_{z \to \infty} Y_{[z]} = y_{[0]}
