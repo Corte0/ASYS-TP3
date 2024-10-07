@@ -410,13 +410,11 @@ inmediatamente después del depósito en el periodo.
       \node [right=2.3cm of sum1] (output) {$y_{[n]}$};
       \node [squaredNode, below=0.7cm of int1] (multi2) {r};
 
-      \draw [myLine] (input) -- (1.994, 2.88);
-      \draw [->] (1.98,2.88) -- (multi1);
+      \draw [->] (input) -| (multi1);
       \draw [->] (multi1) -- (sum1);
       \draw [->] (int1) -- (sum1);
       \draw [->] (sum1) -- (output);
-      \draw [myLine] (nodo1) -- (3.55,-3) -- (-0.014,-3);
-      \draw [->] (0,-3) -- (multi2);
+      \draw [->] (nodo1) |- (multi2);
       \draw [->] (multi2) -- (int1);
 
     \end{tikzpicture}
