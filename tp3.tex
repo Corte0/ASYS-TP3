@@ -56,6 +56,15 @@
 
 \renewcommand{\contentsname}{Tabla de Contenidos}
 
+\usepackage{afterpage}
+\newcommand\myemptypage{
+  \newpage
+  \null
+  \thispagestyle{empty}
+  \addtocounter{page}{-1}
+  \newpage
+}
+
 \title{%
 \setlength{\headwidth}{\textwidth} % Hace que el encabezado tenga el mismo ancho que el contenido
 \setlength{\headheight}{15pt}  % Ajusta la altura del encabezado
@@ -75,8 +84,13 @@ Luciano Tomas Cortesini Perez\\
 \begin{document}
 
 \maketitle
+
+\myemptypage
+
 \tableofcontents
 \thispagestyle{plain}
+
+\myemptypage
 
 \chapter{Ejercicio 1}
 Graficar ambas señales superpuestas, y verificar cuántas muestras de tiempo discreto se corresponden con el rango de
@@ -167,6 +181,8 @@ tiempo continuo utilizado para la representación gráfica.
     \end{figure}
 
 \end{enumerate}
+
+\myemptypage
 
 \chapter{Ejercicio 2}
 Considerar el siguiente sistema de tiempo discreto:
@@ -336,6 +352,7 @@ Considerar el siguiente sistema de tiempo discreto:
 
 \end{enumerate}
 
+\myemptypage
 
 \chapter{Ejercicio 3}
 Considerar un sistema bancario de ahorro a tasa de interés mensual constante. Plantear el sistema considerando un 
@@ -722,6 +739,8 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
     No fuimos capaces de determinar dónde estaba el error.
 
 \end{enumerate}
+
+\myemptypage
 
 \chapter{Ejercicio 6}
 Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencias:
