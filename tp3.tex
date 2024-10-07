@@ -571,9 +571,10 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
       Res(H_{(z)} z^{n-1},z_3) &= \frac{(-0.1292+j0.4797)^{n+2}}{(-0.4602-j1.5231)}
     \end{align*}
 
+    Como la consigna del ejercicio indica que el sistema es causal, la respuesta al impulso debe ser causal.
     Siendo entonces:
-    $$h_{[n]}=\frac{1.4584^{n+2}}{2,7596} + \frac{(-0.1292-j0.4797)^{n+2}}{(-0.4602+j1.5231)} +
-     \frac{(-0.1292+j0.4797)^{n+2}}{(-0.4602-j1.5231)}$$
+    $$h_{[n]}=\left(\frac{1.4584^{n+2}}{2.7596} + \frac{(-0.1292-j0.4797)^{n+2}}{(-0.4602+j1.5231)} +
+    \frac{(-0.1292+j0.4797)^{n+2}}{(-0.4602-j1.5231)}\right)\mu_{[n]}$$
 
     Si bien este resultado en un principio parace una funcion compleja, lo cual no seria valido, teniendo en cuenta que:
     $$(z^*)^n=(z^n)^*$$
@@ -615,6 +616,55 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
 
   \item \fs{} Obtener $y_{[n]} = \mu_{[n]} * h_{[n]}$, la respuesta al escalón unitario sin condiciones iniciales por medio de la
     convolución temporal.
+    \begin{align*}
+      y_{[n]} &= \sum_{k=-\infty}^{\infty}
+      \left(\frac{1.4584^{k+2}}{2.7596} + \frac{(-0.1292-j0.4797)^{k+2}}{(-0.4602+j1.5231)} +
+      \frac{(-0.1292+j0.4797)^{k+2}}{(-0.4602-j1.5231)}\right)\mu_{[k]} \mu_{[n-k]}\\
+      %
+      y_{[n]} &= \sum_{k=0}^{n}
+      \frac{1.4584^{k+2}}{2.7596} + \frac{(-0.1292-j0.4797)^{k+2}}{(-0.4602+j1.5231)} +
+      \frac{(-0.1292+j0.4797)^{k+2}}{(-0.4602-j1.5231)}\\
+      %
+      y_{[n]} &= 
+      \sum_{k=0}^{n} \frac{1.4584^{k+2}}{2.7596} +
+      \sum_{k=0}^{n} \frac{(-0.1292-j0.4797)^{k+2}}{(-0.4602+j1.5231)} +
+      \sum_{k=0}^{n} \frac{(-0.1292+j0.4797)^{k+2}}{(-0.4602-j1.5231)}
+    \end{align*}
+
+    Resolviendo cada sumatoria por separado:
+
+    \begin{align*}
+      \sum_{k=0}^{n} \frac{1.4584^{k+2}}{2.7596} =& \frac{1.4584^2}{2.7596} \sum_{k=0}^{n} 1.4584^k\\
+      =& 0.7707 \frac{1-1.4584^{n+1}}{1-1.4584}\\
+      =& \frac{0.7707 }{1-1.4584}(1-1.4584^{n+1})\\
+      =& -1.6812(1-1.4584^{n+1})
+    \end{align*}
+
+    \begin{align*}
+      \sum_{k=0}^{n} \frac{(-0.1292-j0.4797)^{k+2}}{(-0.4602+j1.5231)}=&
+      \frac{(-0.1292-j0.4797)^2}{(-0.4602+j1.5231)} \sum_{k=0}^{n}(-0.1292-j0.4797)^k\\
+      %
+      =& (0.1134+j0.1059) \frac{1-(-0.1292-j0.4797)^{n+1}}{1-(-0.1292-j0.4797)}\\
+      %
+      =& \frac{(0.1134+j0.1059)}{1-(-0.1292-j0.4797))} (1-(-0.1292-j0.4797)^{n+1})\\
+      %
+      =&  0.1188+j0.0433 (1-(-0.1292-j0.4797)^{n+1})
+    \end{align*}
+
+    \begin{align*}
+      \sum_{k=0}^{n} \frac{(-0.1292+j0.4797)^{k+2}}{(-0.4602-j1.5231)}=&
+      \frac{(-0.1292+j0.4797)^2}{(-0.4602-j1.5231)} \sum_{k=0}^{n}(-0.1292+j0.4797)^k\\
+      %
+      =& (-0.2867+j0.2679) \frac{1-(-0.1292+j0.4797)^{n+1}}{1-(-0.1292+j0.4797)}\\
+      %
+      =& \frac{(-0.2867+j0.2679)}{1-(-0.1292+j0.4797)} (1 - (-0.1292+j0.4797)^{n+1})\\
+      %
+      =& -0.3004+j0.1096 (1 - (-0.1292+j0.4797)^{n+1})
+    \end{align*}
+
+    finalmente:
+    $$y_{[n]} = -1.6812 (1-1.4584^{n+1} + 0.1188+j0.0433 (1-(-0.1292-j0.4797)^{n+1}$$
+    $$- 0.3004+j0.1096 (1 - (-0.1292+j0.4797)^{n+1})$$
 
   \item \fs{} Verificar $y_{[n]}$ para la respuesta al escalón unitario por división directa hasta la quinta muestra y
     reconstruir $Y_{(z)} = \mathcal{Z}\{y_{[n]}\}$.
