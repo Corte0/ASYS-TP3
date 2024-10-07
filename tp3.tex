@@ -509,7 +509,7 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
 
     Despejando $y_{[n]}$:
     $$y_{[n]} = x_{[n]} + 1.2 y_{[n-1]} + 0.13 y_{[n-2]} + 0.36 y_{[n-3]} $$
-    Y aplicando las propiedades de linealidad y deslplazamiento temporal de la transformada Z:
+    Y aplicando las propiedades de linealidad y desplazamiento temporal de la transformada Z:
 
     \begin{align*}
       Y_{(z)} &= X_{(z)} + 1.2 ( Y_{[z]} z^{-1} + y_{[-1]} ) + 0.13 ( Y_{[z]} z^{-2} + y_{[-1]} z^{-1} + y_{[-2]} ) +\\
@@ -541,18 +541,18 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
     Planteamos la antitransformada cómo:
     $$\mathcal{Z}^{-1}\{H_{(z)}\}=h_{[n]}=\frac{1}{2\pi j}\oint_C H_{(z)} z^{n-1}dz$$
 
-    Podemos resolver esta integral a travez del teorema del residuo siendo:
+    Podemos resolver esta integral a través del teorema del residuo siendo:
     $$\oint_C H_{(z)} z^{n-1}dz = 2\pi j\sum_{i=1}^n Res(H_{(z)} z^{n-1},z_i)$$
-    siendo $n$ el numero de polos y $z_i$ el polo iesimo.
+    siendo $n$ el numero de polos y $z_i$ el polo i-esimo.
 
-    identificamos los polos:
+    Identificamos los polos:
     \begin{align*}
       z_1&=1.4584\\
       z_2&=-0.1292-j0.4797\\
       z_3&=-0.1292+j0.4797
     \end{align*}
 
-    Calculamos los resiudos:
+    Calculamos los residuos:
     \begin{align*}
       Res(H_{(z)} z^{n-1},z_1) &= \lim_{z \to z_1}\frac{(z-z_1)z^{n+2}}{(z-z_1) (z-z_2) (z-z_3)}\\
       Res(H_{(z)} z^{n-1},z_1) &= \frac{{z_1}^{n+2}}{ (z_1-z_2) (z_1-z_3)}\\
@@ -576,9 +576,9 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
     $$h_{[n]}=\left(\frac{1.4584^{n+2}}{2.7596} + \frac{(-0.1292-j0.4797)^{n+2}}{(-0.4602+j1.5231)} +
     \frac{(-0.1292+j0.4797)^{n+2}}{(-0.4602-j1.5231)}\right)\mu_{[n]}$$
 
-    Si bien este resultado en un principio parace una funcion compleja, lo cual no seria valido, teniendo en cuenta que:
+    Si bien este resultado en un principio parece una función compleja, lo cual no seria valido, teniendo en cuenta que:
     $$(z^*)^n=(z^n)^*$$
-    Podemos afirmar que los numeradores de los dos ultimos terminos siempre serán complejos conjugados, pudiendo
+    Podemos afirmar que los numeradores de los dos últimos términos siempre serán complejos conjugados, pudiendo
     generalizar la expresión cómo:
     $$\frac{z}{w} + \frac{z^*}{w^*} = \frac{a+jb}{c+jd}+\frac{a-jb}{c-jd} = \frac{2(ac+bd)+j(bc-bc-ad+ad)}{c^2 + d^2}$$
     Demostrando así que la expresión obtenida de $h_{[n]}$ siempre da un resultado real.
@@ -677,7 +677,7 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
       =& -0.3004+j0.1096 (1 - (-0.1292+j0.4797)^{n+1})
     \end{align*}
 
-    finalmente:
+    Finalmente:
     $$y_{[n]} = -1.6812 (1-1.4584^{n+1} + 0.1188+j0.0433 (1-(-0.1292-j0.4797)^{n+1}$$
     $$- 0.3004+j0.1096 (1 - (-0.1292+j0.4797)^{n+1})$$
 
@@ -692,7 +692,7 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
       \lim_{z \to \infty} Y_{[z]} = y_{[0]}
     \end{equation}
 
-    Aplicando el teorema a la respuesta del escalon unitarion en $z$:
+    Aplicando el teorema a la respuesta del escalón unitario en $z$:
     \begin{align*}
       y_{[0]} &= \lim_{z \to \infty} Y(z)\\
       y_{[0]} &= \lim_{z \to \infty} \frac{z^4}{(z - 1)(z^3 - 1.2 z^2 - 0.13 z - 0.36)}\\
@@ -701,28 +701,28 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
       y_{[0]} &= 1
     \end{align*}
     
-    Valuando la funcion $y_{[n]}$ da un numero muy proximo a 1. Suponemos que el error esta dado por el truncamiento de
-    los decimales despues de la coma.
+    Valuando la función $y_{[n]}$ da un numero muy próximo a 1. Suponemos que el error esta dado por el truncamiento de
+    los decimales después de la coma.
 
     El teorema del valor final indica que:
     \begin{equation}
       \lim_{z \to 1} (1 - z^{-1}) Y_{[z]} = y_{[\infty]}
     \end{equation}
 
-    Aplicando el teorema a la respuesta del escalon unitarion en $z$:
+    Aplicando el teorema a la respuesta del escalón unitario en $z$:
     \begin{align*}
       y_{[\infty]} &= \lim_{z \to 1} (1 - z^{-1}) Y(z)\\
       y_{[\infty]} &= \lim_{z \to 1} \frac{(1 - z^{-1}) z^4}{z^4 - 2.2 z^3 + 1.07 z^2 - 0.23 z + 0.36}
     \end{align*}
 
-    Una indeterminacion del tipo $\frac{0}{0}$ que requiere reacomodar los terminos para salvar la indeterminacion:
+    Una indeterminación del tipo $\frac{0}{0}$ que requiere reacomodar los términos para salvar la indeterminación:
     \begin{align*}
       y_{[\infty]} &= \lim_{z \to 1} \frac{(z - 1) z^3}{(z - 1)(z^3 - 1.2 z^2 - 0.13 z - 0.36)}\\
       y_{[\infty]} &= \lim_{z \to 1} \frac{z^3}{z^3 - 1.2 z^2 - 0.13 z - 0.36}\\
       y_{[\infty]} &= -\frac{100}{69}
     \end{align*}
 
-    Lo cual no coincide con lo que da la funcion en $\infty$, la cual diverge por los numeros elevados a n.
+    Lo cual no coincide con lo que da la función en $\infty$, la cual diverge por los números elevados a n.
 
   \item \fs{} Elaborar la síntesis del sistema por medio de diagrama de bloques con retardos unitarios.
 
