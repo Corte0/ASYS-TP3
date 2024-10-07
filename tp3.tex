@@ -529,11 +529,58 @@ Considerar un sistema LTI, causal, caracterizado por una ecuación en diferencia
     Teniendo en cuenta CI nulas para la expresión previamente obtenida de $Y_{[z]}$
 
     $$Y_{(z)} = X_{(z)} + 1.2 Y_{[z]} z^{-1} + 0.13 Y_{[z]} + 0.36 Y_{[z]}z^{-3}$$
-    $$Y_{(z)} - 1.2 Y_{[z]} z^{-1} - 0.13 Y_{[z]} - 0.36 Y_{[z]}z^{-3} = X_{(z)}$$
     $$Y_{(z)} (1 - 1.2 z^{-1} - 0.13 - 0.36 z^{-3}) = X_{(z)}$$
-    $$Y_{(z)}  = \frac{X_{(z)}}{(1 - 1.2 z^{-1} - 0.13 - 0.36 z^{-3})}$$
+    $$H_{(z)} = \frac{1}{1 - 1.2 z^{-1} - 0.13z^{-2} - 0.36 z^{-3}}$$
+    $$H_{(z)} = \frac{z^3}{z^3 - 1.2 z^{2} - 0.13z - 0.36}$$
 
-  \item \fs{} Obtener $h_{[n]} = \mathcal{Z}^{-1}\{H_{(z)}\}$.
+    Factorizando el denominador:
+    $$H_{(z)} = \frac{z^3}{(z-1.4584) (z+(0.1292+j0.4797)) (z+(0.1292-j0.4797))}$$
+
+  \item \fs{} Obtener $h_{[n]} = \mathcal{Z}^{-1}\{H_{(z)}\}$
+
+    Planteamos la antitransformada cómo:
+    $$\mathcal{Z}^{-1}\{H_{(z)}\}=h_{[n]}=\frac{1}{2\pi j}\oint_C H_{(z)} z^{n-1}dz$$
+
+    Podemos resolver esta integral a travez del teorema del residuo siendo:
+    $$\oint_C H_{(z)} z^{n-1}dz = 2\pi j\sum_{i=1}^n Res(H_{(z)} z^{n-1},z_i)$$
+    siendo $n$ el numero de polos y $z_i$ el polo iesimo.
+
+    identificamos los polos:
+    \begin{align*}
+      z_1&=1.4584\\
+      z_2&=-0.1292-j0.4797\\
+      z_3&=-0.1292+j0.4797
+    \end{align*}
+
+    Calculamos los resiudos:
+    \begin{align*}
+      Res(H_{(z)} z^{n-1},z_1) &= \lim_{z \to z_1}\frac{(z-z_1)z^{n+2}}{(z-z_1) (z-z_2) (z-z_3)}\\
+      Res(H_{(z)} z^{n-1},z_1) &= \frac{{z_1}^{n+2}}{ (z_1-z_2) (z_1-z_3)}\\
+      Res(H_{(z)} z^{n-1},z_1) &= \frac{1.4584^{n+2}}{2,7596}
+    \end{align*}
+
+    \begin{align*}
+      Res(H_{(z)} z^{n-1},z_2) &= \lim_{z \to z_2}\frac{(z-z_2)z^{n+2}}{(z-z_1) (z-z_2) (z-z_3)}\\
+      Res(H_{(z)} z^{n-1},z_2) &= \frac{{z_2}^{n+2}}{ (z_2-z_1) (z_2-z_3)}\\
+      Res(H_{(z)} z^{n-1},z_2) &= \frac{(-0.1292-j0.4797)^{n+2}}{(-0.4602+j1.5231)}
+    \end{align*}
+
+    \begin{align*}
+      Res(H_{(z)} z^{n-1},z_3) &= \lim_{z \to z_3}\frac{(z-z_3)z^{n+2}}{(z-z_1) (z-z_2) (z-z_3)}\\
+      Res(H_{(z)} z^{n-1},z_3) &= \frac{{z_3}^{n+2}}{ (z_3-z_1) (z_3-z_2)}\\
+      Res(H_{(z)} z^{n-1},z_3) &= \frac{(-0.1292+j0.4797)^{n+2}}{(-0.4602-j1.5231)}
+    \end{align*}
+
+    Siendo entonces:
+    $$h_{[n]}=\frac{1.4584^{n+2}}{2,7596} + \frac{(-0.1292-j0.4797)^{n+2}}{(-0.4602+j1.5231)} +
+     \frac{(-0.1292+j0.4797)^{n+2}}{(-0.4602-j1.5231)}$$
+
+    Si bien este resultado en un principio parace una funcion compleja, lo cual no seria valido, teniendo en cuenta que:
+    $$(z^*)^n=(z^n)^*$$
+    Podemos afirmar que los numeradores de los dos ultimos terminos siempre serán complejos conjugados, pudiendo
+    generalizar la expresión cómo:
+    $$\frac{z}{w} + \frac{z^*}{w^*} = \frac{a+jb}{c+jd}+\frac{a-jb}{c-jd} = \frac{2(ac+bd)+j(bc-bc-ad+ad)}{c^2 + d^2}$$
+    Demostrando así que la expresión obtenida de $h_{[n]}$ siempre da un resultado real.
 
   \item \fs{} Obtener la respuesta al escalón unitario con condiciones iniciales nulas, por medio de fracciones 
     parciales $y_{[n]} = \mathcal{Z}^{-1}\{Y_{(z)}\}$.
