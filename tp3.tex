@@ -1,17 +1,17 @@
 \documentclass[a4paper,12pt]{report}
 \usepackage[utf8]{inputenc}
 \usepackage{enumitem} %permite el uso de letras para enumerar
-\usepackage{graphicx} %para las imagenes
-\usepackage{float} %para fijar las imagenes
+\usepackage{graphicx} %para las imágenes
+\usepackage{float} %para fijar las imágenes
 
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, positioning} %para hacer diagramas de bloques
 
-\usepackage{amsmath}%para entornos de alineacion
-\usepackage{amsfonts}%para las letras lindas de matematica
+\usepackage{amsmath}%para entornos de alineación
+\usepackage{amsfonts}%para las letras lindas de matemática
 \setlength{\jot}{8pt}%modifica el interlineado
 
-\usepackage{tikz} %Libreria para graficos
+\usepackage{tikz} %Librería para gráficos
 \usetikzlibrary{calc, arrows.meta, positioning}
 
 \usepackage[a4paper, %margenes de pagina
@@ -61,7 +61,7 @@
 \setlength{\headheight}{15pt}  % Ajusta la altura del encabezado
 \setlength{\headsep}{10pt}     % Ajusta la separación entre el encabezado y el contenido
   \fontsize{25}{0}\selectfont Universidad Tecnológica Nacional \\
-  \fontsize{22}{30}\selectfont Analisis de Señales y Sistemas \\
+  \fontsize{22}{30}\selectfont Análisis de Señales y Sistemas \\
   \fontsize{20}{25}\selectfont Trabajo Practico 3
 }
 \author{
@@ -92,7 +92,7 @@ tiempo continuo utilizado para la representación gráfica.
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej1.1.png}
-        \textit{Muestreo con $T_s=0.05$\\Muestas en el intervalo: $48$}
+        \textit{Muestreo con $T_s=0.05$\\Muestras en el intervalo: $48$}
       \end{minipage}
     \end{figure}
 
@@ -101,7 +101,7 @@ tiempo continuo utilizado para la representación gráfica.
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej1.2.png}
-        \textit{Muestreo con $T_s=0.01$\\Muestas en el intervalo: $140$}
+        \textit{Muestreo con $T_s=0.01$\\Muestras en el intervalo: $140$}
       \end{minipage}
     \end{figure}
 
@@ -110,7 +110,7 @@ tiempo continuo utilizado para la representación gráfica.
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej1.3.png}
-        \textit{Muestreo con $T_s=0.1$\\Muestas en el intervalo: $24$}
+        \textit{Muestreo con $T_s=0.1$\\Muestras en el intervalo: $24$}
       \end{minipage}
     \end{figure}
 
@@ -123,7 +123,7 @@ tiempo continuo utilizado para la representación gráfica.
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej1.4.png}
-        \textit{Muestreo con $T_s=0.1$\\Muestas en el intervalo: $32$}
+        \textit{Muestreo con $T_s=0.1$\\Muestras en el intervalo: $32$}
       \end{minipage}
     \end{figure}
 
@@ -132,7 +132,7 @@ tiempo continuo utilizado para la representación gráfica.
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej1.5.png}
-        \textit{Muestreo con $T_s=0.01$\\Muestas en el intervalo: $320$}
+        \textit{Muestreo con $T_s=0.01$\\Muestras en el intervalo: $320$}
       \end{minipage}
     \end{figure}
 
@@ -144,7 +144,7 @@ tiempo continuo utilizado para la representación gráfica.
     \{0, 3.4, 6, 7, 8.5, 10, 13.4\}
     \]
 
-    Para encontrar una funcion que pase por todos los puntos de la secuencia, como una forma de aproximar la señal en el
+    Para encontrar una función que pase por todos los puntos de la secuencia, como una forma de aproximar la señal en el
     dominio temporal de la cual se obtuvo la secuencia, utilizamos el método de interpolación de Lagrange. Definido por:
 
     $$f(t)= \sum_{j=0}^n f[j] \prod_{i=0,i \neq j}^{n} \frac{t - t_i}{t_k - t_i}$$
@@ -195,7 +195,7 @@ Considerar el siguiente sistema de tiempo discreto:
     \draw[->] (h2) -| node [left, pos=0.9] {$+$} (sumador);
     \draw[->] (sumador) -- (h3);
     \draw[->] (h3) -- node {$y[n]$} (output);
-    \draw[->] (c1) |- (h4); % Conexi+n del input hacia h4
+    \draw[->] (c1) |- (h4); % Conexión del input hacia h4
     \draw[->] (h4) -| node[pos=0.9] {$-$} (sumador); % Conexión desde h4 hacia el sumador con signo negativo
 
   \end{tikzpicture}
@@ -280,7 +280,7 @@ Considerar el siguiente sistema de tiempo discreto:
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej2.1.png}
-        \textit{Grafica con las tres funciones discretas.}
+        \textit{Gráfica con las tres funciones discretas.}
       \end{minipage}
     \end{figure}
 
@@ -330,7 +330,7 @@ Considerar el siguiente sistema de tiempo discreto:
       \begin{minipage}{0.55\textwidth}
         \centering
         \includegraphics[width=1\textwidth]{./images/ej2.2.png}
-        \textit{Grafica con las tres funciones discretas.}
+        \textit{Gráfica con las tres funciones discretas.}
       \end{minipage}
     \end{figure}
 
@@ -573,7 +573,7 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
       x[n] = \sum_{k=0}^{N-1} a_k \cdot e^{j\frac{2 \pi k n}{N}}
     \end{equation}
     
-    donde:
+    Donde:
     \begin{equation}
       \label{s.fourier.discreta}
       a_k = \frac{1}{N} \sum_{n=0}^{N-1} x[n] \cdot e^{-j\frac{2 \pi k n}{N}}
@@ -602,7 +602,7 @@ Considerar la siguiente secuencia periódica en tiempo discreto y aplicar la Ser
       |z| = \sqrt{Re(z)^2 + Im(z)^2}
     \end{equation}
 
-    y para la fase, usamos:
+    Y para la fase, usamos:
     \begin{equation}
       \label{fase}
       Arg(z) = arctan2(x, y) = 
